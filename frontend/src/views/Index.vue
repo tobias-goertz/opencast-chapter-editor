@@ -122,6 +122,9 @@ export default {
   mounted() {
     EventBus.$on('DURATION_UPDATE', (payload) => {
       this.videoDuration = payload;
+      if (this.segments.length === 1) {
+        this.segments[0].duration = payload;
+      }
     });
   },
 };
