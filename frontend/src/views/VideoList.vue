@@ -4,7 +4,7 @@
     <hr><br><br>
     <ul>
       <li v-for="(video, index) in videos" :key="index">
-        <router-link :to="{ name: 'editor-index', params: { id: video.id }}">
+        <router-link :to="{ name: 'editor-index', params: { id: video.identifier }}">
           {{ video.title }}
         </router-link>
       </li>
@@ -28,7 +28,7 @@ export default {
       const path = `${this.url}${this.location}/videos`;
       axios.get(path)
         .then((res) => {
-          this.videos = res.data.results;
+          this.videos = res.data;
         })
         .catch((error) => {
           console.error(error);

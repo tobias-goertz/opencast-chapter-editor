@@ -43,9 +43,9 @@ def segments():
 @app.route('/videos')
 def videos():
     res = session.get(
-               f'{opencast_url}/admin-ng/event/events.json',
+               f'{opencast_url}/api/events',
                auth=('admin', 'opencast')).json()
-    return res
+    return json.dumps(res)
 
 
 @app.route('/video')
