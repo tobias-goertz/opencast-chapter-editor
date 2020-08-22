@@ -22,3 +22,12 @@ def segments():
             return error("No Segments found", 404)
     else:
         return error("No ID provided", 422)
+
+
+@app.route('/videos')
+def videos():
+    res = session.get(
+               f'{opencast_url}/admin-ng/event/events.json',
+               auth=('admin', 'opencast')).json()
+    return res
+
