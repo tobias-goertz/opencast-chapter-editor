@@ -6,7 +6,23 @@ from natsort import natsorted
 from os import environ
 from datetime import datetime
 
-opencast_url = environ.get('OPENCAST_URL')
+
+@app.route('/settings')
+def settings():
+    # deactivated until /chapter-editor/settings.json is available
+    # res = session.get(
+    #       f'{opencast_url}/ui/config/studio/settings.json',
+    #       auth=('admin', 'opencast'))
+    # if res.status_code != 200:
+    #     return error(res.text, res.status_code)
+    # else:
+    #     return res.json()
+    with open('ui-settings-sample.json') as json_file:
+        data = json.load(json_file)
+    return data
+
+
+opencast_url = settings()['opencast']['opencastUrl']
 
 
 @app.route('/segments')
