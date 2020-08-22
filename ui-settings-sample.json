@@ -1,0 +1,34 @@
+{
+  "opencast": {
+    "opencastUrl" : "http://localhost:8080",
+    "opencastProxyPassLocation": ""
+  },
+  "backend": {
+    "backendUrl": "http://localhost:5000"
+  },
+  "upload": {
+    "saveWorkflowID": "publish-uploaded-assets",
+    "publishWorkflowID": "publish-uploaded-segments",
+    "postData": {
+        "assets": {
+            "options": [{
+              "id": "catalog_segments_xml",
+              "type": "catalog",
+              "flavorType": "mpeg-7",
+              "flavorSubType": "segments",
+              "displayOrder": 3,
+              "accept": ".xml",
+              "title": "Uplaod Segments"
+            }]
+        },
+        "processing": {
+            "workflow": "",
+            "configuration": {
+                "uploadedSearchPreview": "true",
+                "downloadSourceflavorsExist": "true",
+                "download-source-flavors": "mpeg-7/segments"
+            }
+        }
+    }
+  }
+}
