@@ -7,6 +7,9 @@ from os import environ
 from datetime import datetime
 
 
+opencast_url = environ.get('OPENCAST_URL')
+
+
 @app.route('/settings')
 def settings():
     # deactivated until /chapter-editor/settings.json is available
@@ -20,9 +23,6 @@ def settings():
     with open('ui-settings-sample.json') as json_file:
         data = json.load(json_file)
     return data
-
-
-opencast_url = settings()['opencast']['opencastUrl']
 
 
 @app.route('/segments')
