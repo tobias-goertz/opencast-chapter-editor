@@ -1,16 +1,10 @@
-venv/
-
-*.pyc
-__pycache__/
-
-.env
-.env.development
-.flaskenv
-*.db
-
 .DS_Store
 node_modules
 /dist
+
+# local env files
+.env.local
+.env.*.local
 
 # Log files
 npm-debug.log*
