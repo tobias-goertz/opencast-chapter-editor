@@ -5,13 +5,22 @@
         <h1>Chapter</h1>
       </b-col>
       <b-col>
-        <b-button
-          variant="success"
-          @click="publishSegments"
-          align="right"
-        >
-          Publish
-        </b-button>
+        <b-button-group>
+          <b-button
+            variant="info"
+            @click="publishSegments('save')"
+            align="right"
+          >
+            Save
+          </b-button>
+          <b-button
+            variant="success"
+            @click="publishSegments('publish')"
+            align="right"
+          >
+            Publish
+          </b-button>
+        </b-button-group>
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
@@ -112,21 +121,22 @@ export default {
     }
   },
   methods: {
-    publishSegments() {
-      const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}`;
+    publishSegments(type) {
+      const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}&type=${type}`;
       axios.post(path, {
         segments: this.segments
       })
       .then((res) => {
-        this.flashMessage.success({
-            title: 'Segments Uploaded',
-            message: "The segments are successfully uploaded and will be published soon!",
-            time: 10000
-        });
+        if(type == 'save') {
+          this.flashMessage.success({
+              title: 'Segments Uploaded',
+              message: `The segments are successfully uploaded and will be ${type}ed soon!`,
+              time: 10000
+          });
+        }
       })
       .catch((error) => {
         console.error(error);
-        debugger;
         this.flashMessage.error({
             title: 'Segments not Uploaded',
             message: error.response.data,
