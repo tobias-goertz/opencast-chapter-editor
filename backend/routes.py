@@ -95,5 +95,73 @@ def search():
     else:
         return error("No ID provided", 422)
 
+
+@app.route('/publish', methods=['POST'])
+def publish():
+    id = request.args.get('id')
+    if id:
+        if len(request.json['segments']) > 0:
+            segments = request.json['segments']
+            with open('app/base.xml') as base:
+                data = xmltodict.parse(base.read())
+            videoSegments = []
+            for index, segment in enumerate(segments, start=1):
+                seg = {}
+                seg["@id"] = f'segment-{index}'
+                seg['MediaTime'] = {
+                    "MediaRelTimePoint": MediaRelTimePoint(segment['time']),
+                    "MediaDuration": MediaDuration(segment['duration'])
+                }
+                videoSegments.append(seg)
+            data['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment'] = videoSegments
+            parsedXml = xmltodict.unparse(data)
+            url = f'{opencast_url}/admin-ng/event/{id}/assets'
+            file = {'catalog_segments_xml.0': ('segments.xml', parsedXml, 'text/xml')}
+            req = session.post(url, data=payload,
+                                files=file, auth=('admin', 'opencast'))
+            if req.status_code != 201:
+                return error(req.text, req.status_code)
+            else:
+                return req.text
+        else:
+            return error("No Segments Provided", 422)
+    else:
+        return error("No ID provided", 422)
+
+
+def MediaRelTimePoint(t):
+    time = datetime.utcfromtimestamp(t).strftime('%H:%M:%S:%f')[:-4]
+    return f'T{time}F1000'
+
+
+def MediaDuration(d):
+    time = datetime.utcfromtimestamp(d).strftime('PT%MM%SS%f')[:-4]
+    return f'{time}N1000F'
+
+
+postData = {
+    'assets': {
+        "options": [{
+          "id": "catalog_segments_xml",
+          "type": "catalog",
+          "flavorType": "mpeg-7",
+          "flavorSubType": "segments",
+          "displayOrder": 3,
+          "accept": ".xml",
+          "title": "FOO"
+        }]
+    },
+    "processing": {
+        "workflow": "publish-uploaded-segments",
+        "configuration": {
+            "uploadedSearchPreview": "true",
+            "downloadSourceflavorsExist": "true",
+            "download-source-flavors": "mpeg-7/segments"
+        }
+    }
+}
+payload = {'metadata': json.dumps(postData)}
+
+
 def error(message, status_code):
     return make_response(jsonify(message), status_code)
