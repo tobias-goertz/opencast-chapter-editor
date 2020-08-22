@@ -31,3 +31,17 @@ def videos():
                auth=('admin', 'opencast')).json()
     return res
 
+@app.route('/video')
+def video():
+    id = request.args.get('id')
+    if id:
+        res = session.get(
+                   f'{opencast_url}/api/events/{id}?withpublications=true',
+                   auth=('admin', 'opencast')).json()
+        if res:
+            return res
+        else:
+            return error("Video not found", 404)
+    else:
+        return error("No ID provided", 422)
+
