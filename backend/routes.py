@@ -133,8 +133,8 @@ def publish():
             parsedXml = xmltodict.unparse(data)
             url = f'{opencast_url}/admin-ng/event/{id}/assets'
             file = {'catalog_segments_xml.0': ('segments.xml', parsedXml, 'text/xml')}
-            req = session.post(url, data=payload,
-                                files=file, auth=('admin', 'opencast'))
+            req = session.post(url, data=segmentsPayload(type),
+                               files=file, auth=('admin', 'opencast'))
             if req.status_code != 201:
                 return error(req.text, req.status_code)
             else:
@@ -155,28 +155,14 @@ def MediaDuration(d):
     return f'{time}N1000F'
 
 
-postData = {
-    'assets': {
-        "options": [{
-          "id": "catalog_segments_xml",
-          "type": "catalog",
-          "flavorType": "mpeg-7",
-          "flavorSubType": "segments",
-          "displayOrder": 3,
-          "accept": ".xml",
-          "title": "FOO"
-        }]
-    },
-    "processing": {
-        "workflow": "publish-uploaded-segments",
-        "configuration": {
-            "uploadedSearchPreview": "true",
-            "downloadSourceflavorsExist": "true",
-            "download-source-flavors": "mpeg-7/segments"
-        }
-    }
-}
-payload = {'metadata': json.dumps(postData)}
+def segmentsPayload(type):
+    config = settings()['upload']
+    postData = config['postData']
+    if type == 'save':
+        postData['processing']['workflow'] = config['saveWorkflowID']
+    elif type == 'publish':
+        postData['processing']['workflow'] = config['publishWorkflowID']
+    return {'metadata': json.dumps(postData)}
 
 
 def error(message, status_code):
