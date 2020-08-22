@@ -284,7 +284,11 @@ export default {
         }
         EventBus.$emit('UPDATE_TITLE', data.title);
       } catch (error) {
-        console.error(error);
+        this.flashMessage.error({
+          title: 'Video Error',
+          message: error.message,
+          time: 10000,
+        });
       }
     },
   },

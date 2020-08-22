@@ -102,12 +102,14 @@ export default {
             (this.segments[this.segments.length - 1].time
             + this.segments[this.segments.length - 1].duration) / 1000,
           );
-          this.flashMessage.success({
-            message: 'Segments laoded',
-          });
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error) //eslint-disable-line
+          this.flashMessage.warning({
+            message: 'No segments available, create your own ones',
+            clickable: false,
+            time: 0,
+          });
         });
     },
   },

@@ -31,7 +31,10 @@ export default {
           this.videos = res.data;
         })
         .catch((error) => {
-          console.error(error);
+          this.flashMessage.error({
+            title: error.message,
+            message: 'Videos not loaded',
+          });
         });
     },
   },

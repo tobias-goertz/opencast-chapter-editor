@@ -136,7 +136,6 @@ export default {
         }
       })
       .catch((error) => {
-        console.error(error);
         this.flashMessage.error({
             title: 'Segments not Uploaded',
             message: error.response.data,

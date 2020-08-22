@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Nav/>
-    <FlashMessage></FlashMessage>
+    <FlashMessage class="flash"></FlashMessage>
     <div id="content">
       <router-view/>
     </div>
@@ -19,6 +19,10 @@ button{
   border: none;
   outline: none !important;
   background: transparent;
+}
+.flash{
+  z-index: 10;
+  position: relative;
 }
 </style>
 
