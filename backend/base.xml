@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mpeg7 xmlns="urn:mpeg:mpeg7:schema:2001" xmlns:mpeg7="urn:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Description xsi:type="ContentEntityType">
+    <MultimediaContent xsi:type="VideoType">
+      <Video id="videosegment">
+        <MediaLocator>
+          <MediaUri>http://localhost:8080/static/mh_default_org/engage-player/feef4000-b430-4a40-b67b-c9d3b722e69f/8867d7e7-9dc5-4338-9def-fad3a099b1f7/f0dbdc3e_7e52_4099_80b0_aa416df42926.mp4</MediaUri>
+        </MediaLocator>
+        <MediaTime>
+          <MediaRelTimePoint>T00:00:00:0F1000</MediaRelTimePoint>
+          <MediaDuration>PT04M58S75N1000F</MediaDuration>
+        </MediaTime>
+        <TemporalDecomposition criteria="temporal" gap="false" overlap="false">
+          <VideoSegment>
+          </VideoSegment>
+        </TemporalDecomposition>
+      </Video>
+    </MultimediaContent>
+  </Description>
+</Mpeg7>
