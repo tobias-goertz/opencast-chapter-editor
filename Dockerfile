@@ -1,6 +1,9 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.8
 
-COPY ./requirements.txt /app/requirements.txt
-RUN pip3 install -r /app/requirements.txt
+RUN pip install pipenv
+COPY Pipfile* /tmp/
 
-COPY . /app
+RUN cd /tmp && pipenv lock --requirements > requirements.txt
+RUN pip install -r /tmp/requirements.txt
+
+COPY . /app/
