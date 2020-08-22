@@ -95,3 +95,5 @@ def search():
     else:
         return error("No ID provided", 422)
 
+def error(message, status_code):
+    return make_response(jsonify(message), status_code)
