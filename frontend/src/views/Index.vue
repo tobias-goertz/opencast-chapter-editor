@@ -25,6 +25,7 @@
 import axios from 'axios';
 import Video from '../components/Video.vue';
 import TimeStamps from '../components/TimeStamps.vue';
+import EventBus from '../util/EventBus';
 
 export default {
   components: {
@@ -105,6 +106,10 @@ export default {
         })
         .catch((error) => {
           console.log(error) //eslint-disable-line
+          this.$set(this.segments, 0, {
+            time: 0,
+            duration: this.videoDuration,
+          });
           this.flashMessage.warning({
             message: 'No segments available, create your own ones',
           });
@@ -113,6 +118,11 @@ export default {
   },
   created() {
     this.getSegments();
+  },
+  mounted() {
+    EventBus.$on('DURATION_UPDATE', (payload) => {
+      this.videoDuration = payload;
+    });
   },
 };
 </script>
