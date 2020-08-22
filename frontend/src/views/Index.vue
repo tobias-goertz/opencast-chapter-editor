@@ -107,8 +107,6 @@ export default {
           console.log(error) //eslint-disable-line
           this.flashMessage.warning({
             message: 'No segments available, create your own ones',
-            clickable: false,
-            time: 0,
           });
         });
     },
