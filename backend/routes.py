@@ -115,10 +115,12 @@ def search():
 @app.route('/publish', methods=['POST'])
 def publish():
     id = request.args.get('id')
-    if id:
+    type = request.args.get('type')
+
+    if id and type:
         if len(request.json['segments']) > 0:
             segments = request.json['segments']
-            with open('app/base.xml') as base:
+            with open('backend/base.xml') as base:
                 data = xmltodict.parse(base.read())
             videoSegments = []
             for index, segment in enumerate(segments, start=1):
