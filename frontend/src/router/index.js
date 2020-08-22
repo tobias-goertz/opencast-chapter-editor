@@ -1,0 +1,27 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Index from '../views/Index.vue';
+import VideoList from '../views/VideoList.vue';
+
+Vue.use(VueRouter);
+
+const routes = [
+  {
+    path: '/',
+    name: 'video-index',
+    component: VideoList,
+  },
+  {
+    path: '/index/:id',
+    name: 'editor-index',
+    component: Index,
+  },
+];
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes,
+});
+
+export default router;
