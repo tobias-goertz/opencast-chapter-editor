@@ -62,8 +62,8 @@
     </b-container>
     <br>
     <b-button-group>
-      <b-button variant="success" @click="addMark">Add Marker</b-button>
-      <b-button variant="info" disabled>Update closest Marker</b-button>
+      <b-button variant="success" @click="addMarker">Add Marker</b-button>
+      <b-button variant="info" @click="updateClosestMarker">Update closest Marker</b-button>
       <b-button variant="danger" disabled>Delete closest Marker</b-button>
     </b-button-group>
   </b-container>
@@ -195,8 +195,11 @@ export default {
     },
   },
   methods: {
-    addMark() {
+    addMarker() {
       this.$emit('add-segment', this.sliderVal);
+    },
+    updateClosestMarker() {
+      this.$emit('update-closest-segment', this.sliderVal);
     },
     sliderChange(slider) {
       this.player.forEach((player) => {

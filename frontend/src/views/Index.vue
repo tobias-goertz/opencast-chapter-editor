@@ -6,6 +6,7 @@
           :segments="segments.map((segment) => segment.time)"
           :play-segment-time="playSegmentTime"
           @add-segment="addSegment"
+          @update-closest-segment="updateClosestSegment"
           @dual-player="UpdateDualPlayer"
         />
       </b-container>
@@ -84,6 +85,26 @@ export default {
         });
       }
       this.segments.splice(index, 1);
+    },
+    updateClosestSegment(time) {
+      const closestArr = [...this.segments];
+      closestArr.sort((a, b) => Math.abs(time - a.time) - Math.abs(time - b.time));
+      const closestSegment = closestArr[0];
+      const index = this.segments.indexOf(closestSegment);
+
+      const nextSegment = this.segments[index + 1];
+      const previousSegment = this.segments[index - 1];
+      if (previousSegment) {
+        this.$set(this.segments, index - 1, {
+          ...previousSegment,
+          duration: time - previousSegment.time,
+        });
+      }
+      const duration = (nextSegment?.time || this.videoDuration) - time;
+      this.$set(this.segments, index, {
+        time,
+        duration,
+      });
     },
     UpdateDualPlayer(state) {
       this.dualPlayer = state;
