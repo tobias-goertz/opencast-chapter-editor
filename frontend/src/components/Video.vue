@@ -76,7 +76,7 @@
       </b-button>
       <b-button
         variant="danger"
-        disabled
+        @click="$emit('delete-closest-segment', sliderVal)"
       >
         Delete closest Marker
       </b-button>

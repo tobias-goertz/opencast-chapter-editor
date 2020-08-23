@@ -7,6 +7,7 @@
           :play-segment-time="playSegmentTime"
           @add-segment="addSegment"
           @update-closest-segment="updateClosestSegment"
+          @delete-closest-segment="deleteClosestSegment"
           @dual-player="UpdateDualPlayer"
         />
       </b-container>
@@ -87,11 +88,7 @@ export default {
       this.segments.splice(index, 1);
     },
     updateClosestSegment(time) {
-      const closestArr = [...this.segments];
-      closestArr.sort((a, b) => Math.abs(time - a.time) - Math.abs(time - b.time));
-      const closestSegment = closestArr[0];
-      const index = this.segments.indexOf(closestSegment);
-
+      const index = this.indexOfClosestSegment(time);
       const nextSegment = this.segments[index + 1];
       const previousSegment = this.segments[index - 1];
       if (previousSegment) {
@@ -105,6 +102,16 @@ export default {
         time,
         duration,
       });
+    },
+    deleteClosestSegment(time) {
+      const index = this.indexOfClosestSegment(time);
+      this.deleteSegment(index);
+    },
+    indexOfClosestSegment(time) {
+      const closestArr = [...this.segments];
+      closestArr.sort((a, b) => Math.abs(time - a.time) - Math.abs(time - b.time));
+      const closest = closestArr[0];
+      return this.segments.indexOf(closest);
     },
     UpdateDualPlayer(state) {
       this.dualPlayer = state;
