@@ -33,7 +33,10 @@ def segments():
             f'{opencast_url}/search/episode.json?id={id}',
             auth=('admin', 'opencast')).json()
         if 'segments' in r['search-results']['result']:
-            return r['search-results']['result']['segments']
+            duration = r['search-results']['result']['mediapackage']['duration']
+            segments = r['search-results']['result']['segments']['segment']
+            payload = {'duration': duration, 'segments' : segments}
+            return payload
         else:
             return error("No Segments found", 404)
     else:

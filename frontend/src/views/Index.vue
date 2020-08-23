@@ -117,13 +117,12 @@ export default {
       const path = `${this.url}${this.location}/segments?id=${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
-          this.segments = res.data.segment.map((s) => ({
+          this.segments = res.data.segments.map((s) => ({
             duration: Math.round(s.duration / 1000),
             time: Math.round(s.time / 1000),
           }));
           this.videoDuration = Math.round(
-            (this.segments[this.segments.length - 1].time
-            + this.segments[this.segments.length - 1].duration) / 1000,
+            res.data.duration / 1000,
           );
           EventBus.$emit('TABLE_BUSY', false);
         })
