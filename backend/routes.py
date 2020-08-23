@@ -45,7 +45,8 @@ def videos():
     res = session.get(
                f'{opencast_url}/api/events',
                auth=('admin', 'opencast')).json()
-    return json.dumps(res)
+    payload = {'videos': res, 'opencastUrl': opencast_url}
+    return json.dumps(payload)
 
 
 @app.route('/video')

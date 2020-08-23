@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+import EventBus from '../util/EventBus';
 
 export default {
   data() {
@@ -28,7 +29,8 @@ export default {
       const path = `${this.url}${this.location}/videos`;
       axios.get(path)
         .then((res) => {
-          this.videos = res.data;
+          this.videos = res.data.videos;
+          EventBus.$emit('UPDATE_TITLE', `connected with ${res.data.opencastUrl}`);
         })
         .catch((error) => {
           this.flashMessage.error({
