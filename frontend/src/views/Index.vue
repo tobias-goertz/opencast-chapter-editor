@@ -92,6 +92,7 @@ export default {
       this.playSegmentTime = this.segments[index].time;
     },
     getSegments() {
+      EventBus.$emit('TABLE_BUSY', true);
       const path = `${this.url}${this.location}/segments?id=${this.$route.params.id}`;
       axios.get(path)
         .then((res) => {
@@ -103,6 +104,7 @@ export default {
             (this.segments[this.segments.length - 1].time
             + this.segments[this.segments.length - 1].duration) / 1000,
           );
+          EventBus.$emit('TABLE_BUSY', false);
         })
         .catch((error) => {
           console.log(error) //eslint-disable-line
@@ -113,6 +115,7 @@ export default {
           this.flashMessage.warning({
             message: 'No segments available, create your own ones',
           });
+          EventBus.$emit('TABLE_BUSY', false);
         });
     },
   },

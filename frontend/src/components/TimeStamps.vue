@@ -10,6 +10,7 @@
             variant="info"
             @click="publishSegments('save')"
             align="right"
+            :disabled="tableBusy"
           >
             Save
           </b-button>
@@ -17,6 +18,7 @@
             variant="success"
             @click="publishSegments('publish')"
             align="right"
+            :disabled="tableBusy"
           >
             Publish
           </b-button>
@@ -37,10 +39,17 @@
       :fields="fields"
       :per-page="perPage"
       :current-page="currentPage"
+      :busy="tableBusy"
       striped
       responsive="sm"
       small
     >
+      <template v-slot:table-busy>
+        <div class="text-center text-danger my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>Loading...</strong>
+        </div>
+      </template>
       <template v-slot:cell(index)="data">
         {{ data.index }}
       </template>
@@ -70,9 +79,17 @@
   </b-container>
 </template>
 
+<style>
+/* Busy table styling */
+table.b-table[aria-busy='true'] {
+  opacity: 0.6;
+}
+</style>
+
 <script>
 /* eslint-disable */
 import axios from 'axios';
+import EventBus from '../util/EventBus';
 
 export default {
   props: {
@@ -85,6 +102,7 @@ export default {
     return {
       perPage: 12,
       currentPage: 1,
+      tableBusy: true,
       fields: ['index', 'time', 'duration', 'actions'],
       segments: this.initialSegments,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
@@ -143,6 +161,11 @@ export default {
         });
       });
     },
+  },
+  mounted() {
+    EventBus.$on('TABLE_BUSY', (payload) => {
+      this.tableBusy = payload;
+    });
   },
 };
 </script>
