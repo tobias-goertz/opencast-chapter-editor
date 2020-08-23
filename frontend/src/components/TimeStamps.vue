@@ -40,6 +40,7 @@
       :per-page="perPage"
       :current-page="currentPage"
       :busy="tableBusy"
+      :tbody-transition-props="transProps"
       striped
       responsive="sm"
       small
@@ -51,7 +52,7 @@
         </div>
       </template>
       <template v-slot:cell(index)="data">
-        {{ data.index }}
+        {{ (currentPage * perPage) - perPage + data.index }}
       </template>
       <template v-slot:cell(time)="data">
         {{ data.item.time | formatTime }}
@@ -63,13 +64,13 @@
         <b-button-group>
           <b-button
             variant="danger"
-            @click="$emit('delete-segment', data.index)"
+            @click="$emit('delete-segment', (currentPage * perPage) - perPage + data.index)"
             >
               <font-awesome-icon icon="trash"/>
             </b-button>
             <b-button
               variant="success"
-              @click="$emit('play-segment', data.index)"
+              @click="$emit('play-segment', (currentPage * perPage) - perPage + data.index)"
             >
               <font-awesome-icon icon="play"/>
             </b-button>
@@ -83,6 +84,13 @@
 /* Busy table styling */
 table.b-table[aria-busy='true'] {
   opacity: 0.6;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
 
@@ -103,6 +111,9 @@ export default {
       perPage: 12,
       currentPage: 1,
       tableBusy: true,
+      transProps: {
+        name: 'fade',
+      },
       fields: ['index', 'time', 'duration', 'actions'],
       segments: this.initialSegments,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
