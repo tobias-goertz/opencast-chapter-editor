@@ -13,11 +13,11 @@
         <b-nav-text>
           <img class="country-flag" :src="`http://localhost:8080/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
         </b-nav-text>
-        <b-nav-item-dropdown :text="$t('nav.language')" v-model="$i18n.locale" right>
+        <b-nav-item-dropdown :text="$t('nav.language')" v-model="$root.$i18n.locale" right>
           <b-dropdown-item v-for="(lang, i) in langs"
                         :key="`Lang${i}`"
                         :value="lang.value"
-                        @click="$i18n.locale = lang.value"
+                        @click="langChanged(lang.value)"
           >
             {{ lang.text }}
           </b-dropdown-item>
@@ -52,6 +52,15 @@ export default {
     EventBus.$on('UPDATE_TITLE', (payload) => {
       this.title = payload;
     });
+    if (localStorage.Lang != null) {
+      this.$i18n.locale = localStorage.Lang;
+    }
+  },
+  methods: {
+    langChanged(lang) {
+      localStorage.Lang = lang;
+      this.$root.$i18n.locale = lang;
+    },
   },
 };
 </script>
