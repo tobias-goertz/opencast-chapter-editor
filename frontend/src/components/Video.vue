@@ -1,29 +1,31 @@
 <template>
   <b-container fluid>
-    <b-row>
-      <b-col>
-        <video-player  class="vjs-custom-skin"
-                       ref="videoPlayer1"
-                       :options="playerOptions"
-                       :playsinline="true"
-                       @play="onPlayerPlay"
-                       @pause="onPlayerPause"
-                       @timeupdate="onPlayerTimeupdate"
-                       @ready="playerReadied"
-                       />
-      </b-col>
-      <b-col v-if="dualPlayer">
-        <video-player  class="vjs-custom-skin"
-                      ref="videoPlayer2"
-                      :options="playerOptions"
-                      :playsinline="true"
-                      @play="onPlayerPlay"
-                      @pause="onPlayerPause"
-                      @timeupdate="onPlayerTimeupdate"
-                      @ready="playerReadied"
-                      />
-      </b-col>
-    </b-row>
+    <b-overlay :show="loadVideo" rounded="sm">
+      <b-row>
+        <b-col>
+          <video-player  class="vjs-custom-skin"
+                         ref="videoPlayer1"
+                         :options="playerOptions"
+                         :playsinline="true"
+                         @play="onPlayerPlay"
+                         @pause="onPlayerPause"
+                         @timeupdate="onPlayerTimeupdate"
+                         @ready="playerReadied"
+                         />
+        </b-col>
+        <b-col v-if="dualPlayer">
+          <video-player  class="vjs-custom-skin"
+                        ref="videoPlayer2"
+                        :options="playerOptions"
+                        :playsinline="true"
+                        @play="onPlayerPlay"
+                        @pause="onPlayerPause"
+                        @timeupdate="onPlayerTimeupdate"
+                        @ready="playerReadied"
+                        />
+        </b-col>
+      </b-row>
+    </b-overlay>
     <b-container class="space slider-box">
       <div class="vol-slider">
         <font-awesome-icon icon="volume-up"/>
@@ -156,6 +158,7 @@ export default {
       volume: 80,
       volFormatter: '{value}%',
       video_src: [],
+      loadVideo: true,
       playerOptions: {
         controls: false,
         fluid: true,
@@ -298,6 +301,7 @@ export default {
           EventBus.$emit('DURATION_UPDATE', Number((track1.duration).toFixed()));
         }
         EventBus.$emit('UPDATE_TITLE', data.title);
+        this.loadVideo = false;
       } catch (error) {
         this.flashMessage.error({
           title: 'Video Error',
