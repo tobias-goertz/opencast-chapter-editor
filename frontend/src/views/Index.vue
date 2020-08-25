@@ -149,6 +149,9 @@ export default {
   },
   created() {
     this.getSegments();
+    if (localStorage.Lang != null) {
+      this.$i18n.locale = localStorage.Lang;
+    }
   },
   mounted() {
     EventBus.$on('DURATION_UPDATE', (payload) => {

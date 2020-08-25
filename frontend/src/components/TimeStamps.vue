@@ -112,12 +112,6 @@ export default {
       transProps: {
         name: 'fade',
       },
-      fields: [
-        { key: 'index', label: this.$t('table.index') },
-        { key: 'time',  label: this.$t('table.time') },
-        { key: 'duration', label: this.$t('table.duration') },
-        { key: 'actions', label: this.$t('table.actions') }
-      ],
       segments: this.initialSegments,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
       url: process.env.VUE_APP_BACKEND_URL || '',
@@ -127,6 +121,14 @@ export default {
     rows() {
       return this.segments.length
     },
+    fields() {
+      return [
+        { key: 'index', label: this.$t('table.index') },
+        { key: 'time',  label: this.$t('table.time') },
+        { key: 'duration', label: this.$t('table.duration') },
+        { key: 'actions', label: this.$t('table.actions') }
+      ]
+    }
   },
   watch: {
     initialSegments(segments) {
