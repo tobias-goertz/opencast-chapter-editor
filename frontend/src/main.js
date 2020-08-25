@@ -30,8 +30,8 @@ Vue.use(FlashMessage, {
 
 // eslint-disable-next-line
 const i18n = new VueI18n({
-  locale: 'de',
-  fallbackLocale: 'en',
+  locale: navigator.language || process.env.VUE_APP_I18N_LOCALE,
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
   messages,
 });
 
