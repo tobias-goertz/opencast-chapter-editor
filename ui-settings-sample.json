@@ -16,7 +16,7 @@
               "type": "catalog",
               "flavorType": "mpeg-7",
               "flavorSubType": "segments",
-              "displayOrder": 3,
+              "displayOrder": 4,
               "accept": ".xml",
               "title": "Uplaod Segments"
             }]

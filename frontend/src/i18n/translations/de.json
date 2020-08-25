@@ -1,4 +1,53 @@
 {
-  "translation1": "Übersetzung 1",
-  "translation2": "Übersetzung 2"
+  "countryCode": "de_DE",
+  "videoList": {
+    "heading": "Videos"
+  },
+  "nav": {
+    "title": "Kapitel Editor",
+    "connected": "verbunden mit: ",
+    "language": "Sprache"
+  },
+  "flash": {
+    "error": {
+      "videos": "Es sind keine Videos verfügbar",
+      "segments": {
+        "loading": {
+          "message": "Keine Kapitel verfügbar, erstellen Sie Ihre eigenen"
+        },
+        "save": {
+          "title": "Kapitel konnten nicht gespeichert werden"
+        },
+        "publish": {
+          "title": "Kapitel konnten nicht veröffentlicht werden"
+        }
+      }
+    },
+    "success": {
+      "segments": {
+        "save": {
+          "title": "Kapitel erfolgreich gespeichert!",
+          "message": "Die Kapitel wurden erfolgreich zwischengespeichert. Um die Kapitel zu veröffentlichen, wählen Sie 'Veröffentlichen'"
+        },
+        "publish": {
+          "title": "Kapitel erfolgreich veröffentlicht!",
+          "message": "Die Kapitel wurden erfolgreich hochgeladen und werden bald verarbeitet!"
+        }
+      }
+    }
+  },
+  "controls": {
+    "save": "Speichern",
+    "publish": "Veröffentlichen",
+    "addMarker": "Kapitel hinzufügen",
+    "updateClosest": "nächstgelegenes Kapitel aktualisieren",
+    "deleteClosest": "nächstgelegenes Kapitel löschen"
+  },
+  "table": {
+    "title": "Kapitel",
+    "index": "Index",
+    "time": "Zeit",
+    "duration": "Dauer",
+    "actions": "Aktionen"
+  }
 }

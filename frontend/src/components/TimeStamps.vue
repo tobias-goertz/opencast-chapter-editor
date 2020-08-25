@@ -2,25 +2,23 @@
   <b-container fluid="sm">
     <b-row class="space">
       <b-col>
-        <h1>Chapter</h1>
+        <h1>{{ $t('table.title') }}</h1>
       </b-col>
       <b-col>
         <b-button-group>
           <b-button
             variant="info"
             @click="publishSegments('save')"
-            align="right"
             :disabled="tableBusy"
           >
-            Save
+            {{ $t('controls.save') }}
           </b-button>
           <b-button
             variant="success"
             @click="publishSegments('publish')"
-            align="right"
             :disabled="tableBusy"
           >
-            Publish
+            {{ $t('controls.publish') }}
           </b-button>
         </b-button-group>
         <b-pagination
@@ -114,7 +112,12 @@ export default {
       transProps: {
         name: 'fade',
       },
-      fields: ['index', 'time', 'duration', 'actions'],
+      fields: [
+        { key: 'index', label: this.$t('table.index') },
+        { key: 'time',  label: this.$t('table.time') },
+        { key: 'duration', label: this.$t('table.duration') },
+        { key: 'actions', label: this.$t('table.actions') }
+      ],
       segments: this.initialSegments,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
       url: process.env.VUE_APP_BACKEND_URL || '',
@@ -156,17 +159,15 @@ export default {
         segments: this.segments
       })
       .then((res) => {
-        if(type == 'save') {
-          this.flashMessage.success({
-              title: 'Segments Uploaded',
-              message: `The segments are successfully uploaded and will be ${type}ed soon!`,
-              time: 10000
-          });
-        }
+        this.flashMessage.success({
+            title: this.$t(`flash.success.segments.${type}.title`),
+            message: this.$t(`flash.success.segments.${type}.message`),
+            time: 10000
+        });
       })
       .catch((error) => {
         this.flashMessage.error({
-            title: 'Segments not Uploaded',
+            title: this.$t(`flash.error.segments.${type}.title`),
             message: error.response.data,
             time: 10000,
         });

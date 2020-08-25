@@ -68,19 +68,19 @@
         variant="success"
         @click="$emit('add-segment', sliderVal)"
       >
-          Add Marker
+          {{ $t('controls.addMarker') }}
       </b-button>
       <b-button
         variant="info"
         @click="$emit('update-closest-segment', sliderVal)"
       >
-        Update closest Marker
+        {{ $t('controls.updateClosest') }}
       </b-button>
       <b-button
         variant="danger"
         @click="$emit('delete-closest-segment', sliderVal)"
       >
-        Delete closest Marker
+        {{ $t('controls.deleteClosest') }}
       </b-button>
     </b-button-group>
   </b-container>

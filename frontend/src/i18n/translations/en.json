@@ -1,4 +1,53 @@
 {
-  "translation1": "Übersetzung 1",
-  "translation2": "Übersetzung 2"
+  "countryCode": "en_US",
+  "videoList": {
+    "heading": "Videos"
+  },
+  "nav": {
+    "title": "Chapter Editor",
+    "connected": "connected with: ",
+    "language": "Language"
+  },
+  "flash": {
+    "error": {
+      "videos": "Videos not available",
+      "segments": {
+        "loading": {
+          "message": "No chapters available, create your own ones"
+        },
+        "save": {
+          "title": "Chapters could not be saved"
+        },
+        "publish": {
+          "title": "Chapters could not be published"
+        }
+      }
+    },
+    "success": {
+      "segments": {
+        "save": {
+          "title": "Chapter successfully saved!",
+          "message": "The segments were successfully cached. To publish the chapters, select 'Publish'."
+        },
+        "publish": {
+          "title": "Chapter successfully saved!",
+          "message": "The segments were successfully uploaded and will be processed soon!"
+        }
+      }
+    }
+  },
+  "controls": {
+    "save": "Save",
+    "publish": "Publish",
+    "addMarker": "Add Chapter",
+    "updateClosest": "update closest chapter",
+    "deleteClosest": "delete closest chapter"
+  },
+  "table": {
+    "title": "Chapter",
+    "index": "Index",
+    "time": "Time",
+    "duration": "Duration",
+    "actions": "Actions"
+  }
 }

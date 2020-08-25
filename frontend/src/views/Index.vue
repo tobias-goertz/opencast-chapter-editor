@@ -141,7 +141,7 @@ export default {
             duration: this.videoDuration,
           });
           this.flashMessage.warning({
-            message: 'No segments available, create your own ones',
+            message: this.$t('flash.error.segments.loading.message'),
           });
           EventBus.$emit('TABLE_BUSY', false);
         });

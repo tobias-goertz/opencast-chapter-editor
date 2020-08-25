@@ -1,0 +1,53 @@
+{
+  "countryCode": "es_ES",
+  "videoList": {
+    "heading": "Videos"
+  },
+  "nav": {
+    "title": "Editor del capítulo",
+    "connected": "Conectado con",
+    "language": "Lenguaje"
+  },
+  "flash": {
+    "error": {
+      "videos": "Videos no disponibles",
+      "segments": {
+        "loading": {
+          "message": "No hay capítulos disponibles, crea los tuyos propios"
+        },
+        "save": {
+          "title": "Los capítulos no pudieron ser salvados"
+        },
+        "publish": {
+          "title": "Los capítulos no pudieron ser publicados"
+        }
+      }
+    },
+    "success": {
+      "segments": {
+        "save": {
+          "title": "¡Capítulo salvado con éxito!",
+          "message": "Los segmentos fueron guardados con éxito. Para publicar los capítulos, seleccione 'Publicar'"
+        },
+        "publish": {
+          "title": "¡Capítulo salvado con éxito!",
+          "message": "¡Los segmentos fueron cargados con éxito y serán procesados pronto!"
+        }
+      }
+    }
+  },
+  "controls": {
+    "save": "Salvar",
+    "publish": "Publicar",
+    "addMarker": "Agregar Capítulo",
+    "updateClosest": "actualizar el capítulo más cercano",
+    "deleteClosest": "borrar el capítulo más cercano"
+  },
+  "table": {
+    "title": "Capítulo",
+    "index": "Índice",
+    "time": "Tiempo",
+    "duration": "Duración",
+    "actions": "Acciones"
+  }
+}

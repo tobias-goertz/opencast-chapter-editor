@@ -1,6 +1,6 @@
 <template>
   <b-navbar fixed="top" sticky toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand href="/">Chapter Editor</b-navbar-brand>
+    <b-navbar-brand href="/">{{ $t('nav.title') }}</b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -10,16 +10,28 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
+        <b-nav-text>
+          <img class="country-flag" :src="`http://localhost:8080/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
+        </b-nav-text>
+        <b-nav-item-dropdown :text="$t('nav.language')" v-model="$i18n.locale" right>
+          <b-dropdown-item v-for="(lang, i) in langs"
+                        :key="`Lang${i}`"
+                        :value="lang.value"
+                        @click="$i18n.locale = lang.value"
+          >
+            {{ lang.text }}
+          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
+
+<style media="screen">
+.country-flag{
+  height: 15px;
+}
+</style>
 
 <script>
 import EventBus from '../util/EventBus';
@@ -28,6 +40,12 @@ export default {
   data() {
     return {
       title: '',
+      langs: [
+        { value: 'en', text: 'English' },
+        { value: 'de', text: 'Deutsch' },
+        { value: 'es', text: 'Español' },
+      ],
+      countryCode: 'de_DE',
     };
   },
   mounted() {

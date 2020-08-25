@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h1>Videos</h1>
+    <h1>{{ $t('videoList.heading') }}</h1>
     <hr><br><br>
     <ul>
       <li v-for="(video, index) in videos" :key="index">
@@ -30,12 +30,12 @@ export default {
       axios.get(path)
         .then((res) => {
           this.videos = res.data.videos;
-          EventBus.$emit('UPDATE_TITLE', `connected with ${res.data.opencastUrl}`);
+          EventBus.$emit('UPDATE_TITLE', `${this.$t('nav.connected')} ${res.data.opencastUrl}`);
         })
         .catch((error) => {
           this.flashMessage.error({
             title: error.message,
-            message: 'Videos not loaded',
+            message: this.$t('flash.error.videos'),
           });
         });
     },
