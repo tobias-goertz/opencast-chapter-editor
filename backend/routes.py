@@ -25,8 +25,8 @@ def settings():
     return data
 
 
-@app.route('/segments')
-def segments():
+@app.route('/segmentsOld')
+def segmentsOld():
     id = request.args.get('id')
     if id:
         r = session.get(
@@ -39,6 +39,31 @@ def segments():
             return payload
         else:
             return error("No Segments found", 404)
+    else:
+        return error("No ID provided", 422)
+
+
+@app.route('/segments')
+def segments():
+    id = request.args.get('id')
+    if id:
+        catalogs = session.get(
+            f'{opencast_url}/admin-ng/event/{id}/asset/catalog/catalogs.json',
+            auth=('admin', 'opencast')).json()
+        for catalog in catalogs:
+            if catalog['type'] == 'mpeg-7/segments':
+                assetUrl = catalog['url']
+        segmentsXml = session.get(assetUrl, auth=('admin', 'opencast')).text
+        parsedSegmentsXml = xmltodict.parse(segmentsXml)
+        segments = parsedSegmentsXml['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment']
+        convertedSegments = []
+        for segment in segments:
+            convertedSegment = {}
+            convertedSegment['time'] = FromMediaRelTimePoint(segment['MediaTime']['MediaRelTimePoint'])
+            convertedSegment['duration'] = FromMediaDuration(segment['MediaTime']['MediaDuration'])
+            convertedSegments.append(convertedSegment)
+        payload = {'segments': convertedSegments}
+        return payload
     else:
         return error("No ID provided", 422)
 
@@ -131,8 +156,8 @@ def publish():
                 seg = {}
                 seg["@id"] = f'segment-{index}'
                 seg['MediaTime'] = {
-                    "MediaRelTimePoint": MediaRelTimePoint(segment['time']),
-                    "MediaDuration": MediaDuration(segment['duration'])
+                    "MediaRelTimePoint": ToMediaRelTimePoint(segment['time']),
+                    "MediaDuration": ToMediaDuration(segment['duration'])
                 }
                 videoSegments.append(seg)
             data['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment'] = videoSegments
@@ -151,14 +176,28 @@ def publish():
         return error("No ID provided", 422)
 
 
-def MediaRelTimePoint(t):
+def ToMediaRelTimePoint(t):
     time = datetime.utcfromtimestamp(t).strftime('%H:%M:%S:%f')[:-4]
     return f'T{time}F1000'
 
 
-def MediaDuration(d):
+def ToMediaDuration(d):
     time = datetime.utcfromtimestamp(d).strftime('PT%MM%SS%f')[:-4]
     return f'{time}N1000F'
+
+
+def FromMediaRelTimePoint(t):
+    time = t.replace('F1000', '')
+    time = datetime.strptime(time, 'T%H:%M:%S:%f')
+    time_seconds = time.second + time.minute*60 + time.hour*3600
+    return time_seconds
+
+
+def FromMediaDuration(duration):
+    duration = duration.replace('N1000F', '')
+    duration = datetime.strptime(duration, 'PT%MM%SS%f')
+    duration_seconds = duration.second + duration.minute*60 + duration.hour*3600
+    return duration_seconds
 
 
 def segmentsPayload(type):

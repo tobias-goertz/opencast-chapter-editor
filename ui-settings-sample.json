@@ -7,7 +7,7 @@
     "backendUrl": "http://localhost:5000"
   },
   "upload": {
-    "saveWorkflowID": "publish-uploaded-assets",
+    "saveWorkflowID": "save-uploaded-assets",
     "publishWorkflowID": "publish-uploaded-segments",
     "postData": {
         "assets": {
