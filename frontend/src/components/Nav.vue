@@ -11,7 +11,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-text>
-          <img class="country-flag" :src="`http://localhost:8080/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
+          <img class="country-flag"
+            :src="`${opencast_url}/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
         </b-nav-text>
         <b-nav-item-dropdown :text="$t('nav.language')" v-model="$root.$i18n.locale" right>
           <b-dropdown-item v-for="(lang, i) in langs"
@@ -40,6 +41,7 @@ export default {
   data() {
     return {
       title: '',
+      opencast_url: process.env.VUE_APP_OPENCAST_URL,
       langs: [
         { value: 'en', text: 'English' },
         { value: 'de', text: 'Deutsch' },
