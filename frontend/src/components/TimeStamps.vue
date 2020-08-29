@@ -61,7 +61,14 @@
         {{ (currentPage * perPage) - perPage + data.index }}
       </template>
       <template v-slot:cell(time)="data">
-        {{ data.item.time | formatTime }}
+        <b-form-spinbutton
+          v-model="data.item.time"
+          class="w-75 center"
+          :max="maxTimePerRow(data)"
+          :min="minTimePerRow(data)"
+          :formatter-fn="formatTime"
+          @change="changeTime">
+        </b-form-spinbutton>
       </template>
       <template v-slot:cell(duration)="data">
         {{ data.item.duration | formatTime }}
@@ -100,6 +107,10 @@ table.b-table[aria-busy='true'] {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.center{
+  text-align: center;
 }
 </style>
 
@@ -168,6 +179,26 @@ export default {
     }
   },
   methods: {
+    maxTimePerRow(data){
+      if(this.segments.length === data.index + 1){
+        return this.videoDuration;
+      } else {
+        return this.segments[data.index + 1].time - 1;
+      }
+    },
+    minTimePerRow(data){
+      if(data.index > 0){
+        return this.segments[data.index - 1].time + 1;
+      } else {
+        return 0;
+      }
+    },
+    changeTime(value){
+      this.$parent.updateClosestSegment(value);
+    },
+    formatTime(value){
+      return this.$options.filters.formatTime(value);
+    },
     deleteAllSegments(){
       this.segments.length = 1
       this.$set(this.segments, 0, {
