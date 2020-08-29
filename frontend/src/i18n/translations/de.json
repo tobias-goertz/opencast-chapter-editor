@@ -42,7 +42,8 @@
     "addMarker": "Kapitel hinzufügen",
     "updateClosest": "nächstgelegenes Kapitel aktualisieren",
     "deleteClosest": "nächstgelegenes Kapitel löschen",
-    "deleteAll": "Alle löschen"
+    "deleteAll": "Alle löschen",
+    "reload": "Neuladen"
   },
   "table": {
     "title": "Kapitel",

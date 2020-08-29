@@ -42,7 +42,8 @@
     "addMarker": "Add Chapter",
     "updateClosest": "update closest chapter",
     "deleteClosest": "delete closest chapter",
-    "deleteAll": "delete all"
+    "deleteAll": "delete all",
+    "reload": "reload from Server"
   },
   "table": {
     "title": "Chapter",

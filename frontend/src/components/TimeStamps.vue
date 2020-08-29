@@ -1,39 +1,54 @@
 <template>
   <b-container fluid="sm">
-    <b-row class="space">
-      <b-col>
-        <h1>{{ $t('table.title') }}</h1>
+    <b-row>
+      <b-col cols="8">
+        <div>
+          <b-button-group>
+            <b-button
+              variant="danger"
+              @click="deleteAllSegments"
+              :disabled="tableBusy"
+              class="space-around"
+            >
+              {{ $t('controls.deleteAll') }}
+            </b-button>
+            <b-button
+              variant="secondary"
+              @click="reloadSegments"
+              :disabled="tableBusy"
+              class="space-around"
+            >
+              {{ $t('controls.reload') }}
+            </b-button>
+          </b-button-group>
+          <b-button-group>
+            <b-button
+              variant="info"
+              @click="publishSegments('save')"
+              :disabled="tableBusy"
+              class="space-around"
+            >
+              {{ $t('controls.save') }}
+            </b-button>
+            <b-button
+              variant="success"
+              @click="publishSegments('publish')"
+              :disabled="tableBusy"
+              class="space-around"
+            >
+              {{ $t('controls.publish') }}
+            </b-button>
+          </b-button-group>
+        </div>
       </b-col>
-      <b-col>
-        <b-button-group>
-          <b-button
-            variant="danger"
-            @click="deleteAllSegments"
-            :disabled="tableBusy"
-          >
-            {{ $t('controls.deleteAll') }}
-          </b-button>
-          <b-button
-            variant="info"
-            @click="publishSegments('save')"
-            :disabled="tableBusy"
-          >
-            {{ $t('controls.save') }}
-          </b-button>
-          <b-button
-            variant="success"
-            @click="publishSegments('publish')"
-            :disabled="tableBusy"
-          >
-            {{ $t('controls.publish') }}
-          </b-button>
-        </b-button-group>
+      <b-col cols="4">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"
           :per-page="perPage"
           aria-controls="segments"
           align="right"
+          class="pagination"
         >
         </b-pagination>
       </b-col>
@@ -48,8 +63,9 @@
       :busy="tableBusy"
       :tbody-transition-props="transProps"
       striped
-      responsive="sm"
+      responsive
       small
+      fixed
     >
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
@@ -63,7 +79,7 @@
       <template v-slot:cell(time)="data">
         <b-form-spinbutton
           v-model="data.item.time"
-          class="w-75 center"
+          class="center"
           :max="maxTimePerRow(data)"
           :min="minTimePerRow(data)"
           :formatter-fn="formatTime"
@@ -74,7 +90,10 @@
         {{ data.item.duration | formatTime }}
       </template>
       <template v-slot:cell(title)="data">
-        <b-form-input v-model="data.item.title"></b-form-input>
+        <b-form-input
+          v-model="data.item.title"
+          class="mb-2 mr-sm-2 mb-sm-0">
+        </b-form-input>
       </template>
       <template v-slot:cell(actions)="data">
         <b-button-group>
@@ -112,6 +131,15 @@ table.b-table[aria-busy='true'] {
 .center{
   text-align: center;
 }
+
+.space-around{
+  margin: 3px 3px;
+}
+
+.pagination{
+  margin-top: 0.5rem;
+}
+
 </style>
 
 <script>
@@ -138,6 +166,7 @@ export default {
       videoDuration: 0,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
       url: process.env.VUE_APP_BACKEND_URL || '',
+      id: this.$route.params.id,
     };
   },
   computed: {
@@ -179,27 +208,30 @@ export default {
     }
   },
   methods: {
-    maxTimePerRow(data){
+    maxTimePerRow(data) {
       if(this.segments.length === data.index + 1){
         return this.videoDuration;
       } else {
         return this.segments[data.index + 1].time - 1;
       }
     },
-    minTimePerRow(data){
+    minTimePerRow(data) {
       if(data.index > 0){
         return this.segments[data.index - 1].time + 1;
       } else {
         return 0;
       }
     },
-    changeTime(value){
+    changeTime(value) {
       this.$parent.updateClosestSegment(value);
     },
-    formatTime(value){
+    formatTime(value) {
       return this.$options.filters.formatTime(value);
     },
-    deleteAllSegments(){
+    reloadSegments() {
+      this.$parent.getSegments();
+    },
+    deleteAllSegments() {
       this.segments.length = 1
       this.$set(this.segments, 0, {
         ...this.segments[0],
@@ -207,7 +239,7 @@ export default {
       });
     },
     publishSegments(type) {
-      const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}&type=${type}`;
+      const path = `${this.url}${this.location}/publish?id=${this.id}&type=${type}`;
       axios.post(path, {
         segments: this.segments,
         videoUrl: this.videoUrl,

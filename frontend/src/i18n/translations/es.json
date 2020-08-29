@@ -42,7 +42,8 @@
     "addMarker": "Agregar Capítulo",
     "updateClosest": "actualizar el capítulo más cercano",
     "deleteClosest": "borrar el capítulo más cercano",
-    "deleteAll": "borrar todo"
+    "deleteAll": "borrar todo",
+    "reload": "recargar desde el servidor"
   },
   "table": {
     "title": "Capítulo",
