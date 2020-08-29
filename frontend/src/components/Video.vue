@@ -53,7 +53,7 @@
           <font-awesome-icon icon="fast-forward" class="control fa-sm"/>
         </button>
       </div>
-      <p>{{ sliderVal | formatTime }}</p>
+      <p>{{ sliderVal | formatTime }} / {{ this.sliderOptions.max | formatTime }}</p>
       <b-container class="slider">
         <vue-slider
           v-model="sliderVal"
