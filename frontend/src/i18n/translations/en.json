@@ -48,6 +48,7 @@
     "index": "Index",
     "time": "Time",
     "duration": "Duration",
+    "chapterTitle": "Title",
     "actions": "Actions"
   }
 }

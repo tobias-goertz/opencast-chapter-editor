@@ -80,6 +80,10 @@ def public_segments(id):
         for segment in segments:
             segment['duration'] = segment.get('duration') / 1000
             segment['time'] = segment.get('time') / 1000
+            for key in ['relevance', 'hit', 'previews']:
+                segment.pop(key)
+            index = segment.get('index')
+            segment['title'] = f'segment-{index}'
         payload = dict(duration=duration, segments=segments, type='public')
         return payload
     except KeyError:
@@ -175,7 +179,7 @@ def publish():
             video_segments = []
             for index, segment in enumerate(segments, start=1):
                 seg = dict()
-                seg["@id"] = f'segment-{index}'
+                seg["@id"] = segment.get('title')
                 seg['MediaTime'] = {
                     "MediaRelTimePoint": ToMediaRelTimePoint(segment['time']),
                     "MediaDuration": ToMediaDuration(segment['duration'])

@@ -34,6 +34,7 @@
     <b-table
       id="segments"
       :items="segments"
+      :v-bind="segments"
       :fields="fields"
       :per-page="perPage"
       :current-page="currentPage"
@@ -57,6 +58,9 @@
       </template>
       <template v-slot:cell(duration)="data">
         {{ data.item.duration | formatTime }}
+      </template>
+      <template v-slot:cell(title)="data">
+        <b-form-input v-model="data.item.title"></b-form-input>
       </template>
       <template v-slot:cell(actions)="data">
         <b-button-group>
@@ -126,7 +130,8 @@ export default {
         { key: 'index', label: this.$t('table.index') },
         { key: 'time',  label: this.$t('table.time') },
         { key: 'duration', label: this.$t('table.duration') },
-        { key: 'actions', label: this.$t('table.actions') }
+        { key: 'title', label: this.$t('table.chapterTitle') },
+        { key: 'actions', label: this.$t('table.actions') },
       ]
     }
   },

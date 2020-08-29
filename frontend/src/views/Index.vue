@@ -128,6 +128,7 @@ export default {
           this.segments = res.data.segments.map((s) => ({
             duration: Math.round(s.duration),
             time: Math.round(s.time),
+            title: s.title,
           }));
           this.videoDuration = Math.round(res.data.duration);
           EventBus.$emit('TABLE_BUSY', false);
