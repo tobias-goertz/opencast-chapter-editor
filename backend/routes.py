@@ -169,8 +169,9 @@ def search():
 @app.route('/publish', methods=['POST'])
 def publish():
     id = request.args.get('id')
-    video_url = request.json.get('videoUrl')
     type = request.args.get('type')
+    video_url = request.json.get('videoUrl')
+    video_duration = request.json.get('videoDuration')
     if id and type and video_url:
         if len(request.json.get('segments')) > 0:
             segments = request.json.get('segments')
@@ -188,6 +189,7 @@ def publish():
             video = data['Mpeg7']['Description']['MultimediaContent']['Video']
             video['TemporalDecomposition']['VideoSegment'] = video_segments
             video['MediaLocator']['MediaUri'] = video_url
+            video['MediaTime']['MediaDuration'] = ToMediaDuration(video_duration)
             parsed_xml = xmltodict.unparse(data)
             url = f'{opencast_url}/admin-ng/event/{id}/assets'
             file = {'catalog_segments_xml.0': ('segments.xml', parsed_xml, 'text/xml')}

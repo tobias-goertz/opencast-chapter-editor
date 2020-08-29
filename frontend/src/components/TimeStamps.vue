@@ -179,7 +179,8 @@ export default {
       const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}&type=${type}`;
       axios.post(path, {
         segments: this.segments,
-        videoUrl: this.videoUrl
+        videoUrl: this.videoUrl,
+        videoDuration: this.videoDuration,
       })
       .then((res) => {
         this.flashMessage.success({
