@@ -289,16 +289,19 @@ export default {
           this.player[1].src(track2.url);
           this.sliderOptions.max = Number((track1.duration).toFixed());
           EventBus.$emit('DURATION_UPDATE', Number((track1.duration).toFixed()));
+          EventBus.$emit('VIDEO_SRC', track1.url);
         } else if (data.presentation.length > 0) {
           const track1 = data.presentation[data.presentation.length - 1];
           this.player[0].src(track1.url);
           this.sliderOptions.max = Number((track1.duration).toFixed());
           EventBus.$emit('DURATION_UPDATE', Number((track1.duration).toFixed()));
+          EventBus.$emit('VIDEO_SRC', track1.url);
         } else {
           const track1 = data.presenter[data.presenter.length - 1];
           this.player[0].src(track1.url);
           this.sliderOptions.max = Number((track1.duration).toFixed());
           EventBus.$emit('DURATION_UPDATE', Number((track1.duration).toFixed()));
+          EventBus.$emit('VIDEO_SRC', track1.url);
         }
         EventBus.$emit('UPDATE_TITLE', data.title);
         this.loadVideo = false;

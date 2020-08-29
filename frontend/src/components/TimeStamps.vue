@@ -158,7 +158,8 @@ export default {
     publishSegments(type) {
       const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}&type=${type}`;
       axios.post(path, {
-        segments: this.segments
+        segments: this.segments,
+        videoUrl: this.videoUrl
       })
       .then((res) => {
         this.flashMessage.success({
@@ -179,6 +180,9 @@ export default {
   mounted() {
     EventBus.$on('TABLE_BUSY', (payload) => {
       this.tableBusy = payload;
+    });
+    EventBus.$on('VIDEO_SRC', (payload) => {
+      this.videoUrl = payload;
     });
   },
 };
