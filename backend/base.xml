@@ -8,7 +8,7 @@
         </MediaLocator>
         <MediaTime>
           <MediaRelTimePoint>T00:00:00:0F1000</MediaRelTimePoint>
-          <MediaDuration>PT04M58S75N1000F</MediaDuration>
+          <MediaDuration></MediaDuration>
         </MediaTime>
         <TemporalDecomposition criteria="temporal" gap="false" overlap="false">
           <VideoSegment>
