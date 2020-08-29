@@ -107,7 +107,7 @@ def video():
         else:
             return error("Video not found", 404)
     else:
-        return error("No ID provided", 422)
+        return error("No ID provided", 400)
 
 
 @app.route('/search')
