@@ -8,6 +8,7 @@ from datetime import datetime
 
 
 opencast_url = environ.get('OPENCAST_URL')
+opencast_auth = (environ.get('OPENCAST_USER'), environ.get('OPENCAST_PW'))
 
 
 @app.route('/settings')
@@ -15,7 +16,7 @@ def settings():
     # deactivated until /chapter-editor/settings.json is available
     # res = session.get(
     #       f'{opencast_url}/ui/config/studio/settings.json',
-    #       auth=('admin', 'opencast'))
+    #       auth=opencast_auth)
     # if res.status_code != 200:
     #     return error(res.text, res.status_code)
     # else:
@@ -72,8 +73,8 @@ def segments():
 def videos():
     res = session.get(
                f'{opencast_url}/api/events',
-               auth=('admin', 'opencast')).json()
     payload = {'videos': res, 'opencastUrl': opencast_url}
+               auth=opencast_auth).json()
     return json.dumps(payload)
 
 
@@ -83,7 +84,7 @@ def video():
     if id:
         res = session.get(
                    f'{opencast_url}/api/events/{id}?withpublications=true',
-                   auth=('admin', 'opencast')).json()
+                   auth=opencast_auth).json()
         if res:
             return res
         else:
@@ -98,7 +99,7 @@ def search():
     if id:
         req = session.get(
                    f'{opencast_url}/search/episode.json?id={id}',
-                   auth=('admin', 'opencast')).json()
+                   auth=opencast_auth).json()
         if 'result' in req['search-results']:
             mediapackage = req['search-results']['result']['mediapackage']
             tracks = mediapackage['media']['track']
@@ -165,7 +166,7 @@ def publish():
             url = f'{opencast_url}/admin-ng/event/{id}/assets'
             file = {'catalog_segments_xml.0': ('segments.xml', parsedXml, 'text/xml')}
             req = session.post(url, data=segmentsPayload(type),
-                               files=file, auth=('admin', 'opencast'))
+                               files=file, auth=opencast_auth)
             if req.status_code != 201:
                 return error(req.text, req.status_code)
             else:
