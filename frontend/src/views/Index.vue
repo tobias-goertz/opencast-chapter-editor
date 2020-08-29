@@ -97,13 +97,13 @@ export default {
           ...previousSegment,
           duration: time - previousSegment.time,
         });
-
-        const duration = (nextSegment?.time || this.videoDuration) - time;
-        this.$set(this.segments, index, {
-          time,
-          duration,
-        });
       }
+      const duration = (nextSegment?.time || this.videoDuration) - time;
+      this.$set(this.segments, index, {
+        ...this.segments[index],
+        time,
+        duration,
+      });
     },
     deleteClosestSegment(time) {
       const index = this.indexOfClosestSegment(time);
