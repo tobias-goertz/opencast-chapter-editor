@@ -4,7 +4,7 @@
     <MultimediaContent xsi:type="VideoType">
       <Video id="videosegment">
         <MediaLocator>
-          <MediaUri>http://localhost:8080/static/mh_default_org/engage-player/feef4000-b430-4a40-b67b-c9d3b722e69f/8867d7e7-9dc5-4338-9def-fad3a099b1f7/f0dbdc3e_7e52_4099_80b0_aa416df42926.mp4</MediaUri>
+          <MediaUri></MediaUri>
         </MediaLocator>
         <MediaTime>
           <MediaRelTimePoint>T00:00:00:0F1000</MediaRelTimePoint>
