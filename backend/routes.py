@@ -75,7 +75,7 @@ def public_segments(id):
         f'{opencast_url}/search/episode.json?id={id}',
         auth=opencast_auth).json()
     try:
-        duration = res['search-results']['result']['mediapackage']['duration']
+        duration = res['search-results']['result']['mediapackage']['duration'] / 1000
         segments = res['search-results']['result']['segments']['segment']
         for segment in segments:
             segment['duration'] = segment.get('duration') / 1000
