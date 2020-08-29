@@ -26,47 +26,64 @@ def settings():
     return data
 
 
-@app.route('/segmentsOld')
-def segmentsOld():
-    id = request.args.get('id')
-    if id:
-        r = session.get(
-            f'{opencast_url}/search/episode.json?id={id}',
-            auth=('admin', 'opencast')).json()
-        if 'segments' in r['search-results']['result']:
-            duration = r['search-results']['result']['mediapackage']['duration']
-            segments = r['search-results']['result']['segments']['segment']
-            payload = {'duration': duration, 'segments' : segments}
-            return payload
-        else:
-            return error("No Segments found", 404)
-    else:
-        return error("No ID provided", 422)
-
-
 @app.route('/segments')
 def segments():
     id = request.args.get('id')
     if id:
-        catalogs = session.get(
-            f'{opencast_url}/admin-ng/event/{id}/asset/catalog/catalogs.json',
-            auth=('admin', 'opencast')).json()
-        for catalog in catalogs:
-            if catalog['type'] == 'mpeg-7/segments':
-                assetUrl = catalog['url']
-        segmentsXml = session.get(assetUrl, auth=('admin', 'opencast')).text
-        parsedSegmentsXml = xmltodict.parse(segmentsXml)
-        segments = parsedSegmentsXml['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment']
-        convertedSegments = []
-        for segment in segments:
-            convertedSegment = {}
-            convertedSegment['time'] = FromMediaRelTimePoint(segment['MediaTime']['MediaRelTimePoint'])
-            convertedSegment['duration'] = FromMediaDuration(segment['MediaTime']['MediaDuration'])
-            convertedSegments.append(convertedSegment)
-        payload = {'segments': convertedSegments}
-        return payload
+        res = session.get(
+            f'{opencast_url}/assets/episode/{id}',
+            auth=opencast_auth)
+        if res.status_code == 200:
+            parsed_mediapackage = xmltodict.parse(res.text)
+            catalogs = parsed_mediapackage['mediapackage']['metadata']['catalog']
+            if type(catalogs) is list:
+                for catalog in catalogs:
+                    if catalog.get('@type') == 'mpeg-7/segments':
+                        asset_url = catalog['url']
+            else:
+                if catalogs.get('@type') == 'mpeg-7/segments':
+                    asset_url = catalogs['url']
+            try:
+                asset_url
+            except NameError:
+                return public_segments(id)
+
+            segments_xml = session.get(asset_url, auth=opencast_auth).text
+            parsed_segments_xml = xmltodict.parse(segments_xml)
+            segments = parsed_segments_xml['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment']
+            converted_duration = FromMediaDuration(parsed_segments_xml['Mpeg7']['Description']['MultimediaContent']['Video']['MediaTime']['MediaDuration'])
+            converted_segments = []
+            if type(segments) is list:
+                for segment in segments:
+                    time = FromMediaRelTimePoint(segment['MediaTime']['MediaRelTimePoint'])
+                    duration = FromMediaDuration(segment['MediaTime']['MediaDuration'])
+                    title = segment['@id']
+                    converted_segment = dict(time=time, duration=duration, title=title)
+                    converted_segments.append(converted_segment)
+                payload = dict(segments=converted_segments, duration=converted_duration)
+                return payload
+            else:
+                return error("No segments found", 404)
+        else:
+            return error("mediapackage not found", 404)
     else:
-        return error("No ID provided", 422)
+        return error("No ID provided", 400)
+
+
+def public_segments(id):
+    res = session.get(
+        f'{opencast_url}/search/episode.json?id={id}',
+        auth=opencast_auth).json()
+    try:
+        duration = res['search-results']['result']['mediapackage']['duration']
+        segments = res['search-results']['result']['segments']['segment']
+        for segment in segments:
+            segment['duration'] = segment.get('duration') / 1000
+            segment['time'] = segment.get('time') / 1000
+        payload = dict(duration=duration, segments=segments, type='public')
+        return payload
+    except KeyError:
+        return error("No published segments found", 404)
 
 
 @app.route('/videos')
