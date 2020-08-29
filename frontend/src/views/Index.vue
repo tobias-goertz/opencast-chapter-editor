@@ -126,12 +126,10 @@ export default {
       axios.get(path)
         .then((res) => {
           this.segments = res.data.segments.map((s) => ({
-            duration: Math.round(s.duration / 1000),
-            time: Math.round(s.time / 1000),
+            duration: Math.round(s.duration),
+            time: Math.round(s.time),
           }));
-          this.videoDuration = Math.round(
-            res.data.duration / 1000,
-          );
+          this.videoDuration = Math.round(res.data.duration);
           EventBus.$emit('TABLE_BUSY', false);
         })
         .catch((error) => {
