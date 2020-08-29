@@ -90,8 +90,8 @@ def public_segments(id):
 def videos():
     res = session.get(
                f'{opencast_url}/api/events',
-    payload = {'videos': res, 'opencastUrl': opencast_url}
                auth=opencast_auth).json()
+    payload = dict(videos=res, opencastUrl=opencast_url)
     return json.dumps(payload)
 
 
@@ -120,7 +120,6 @@ def search():
         if 'result' in req['search-results']:
             mediapackage = req['search-results']['result']['mediapackage']
             tracks = mediapackage['media']['track']
-            v = {}
             presenter = []
             presentation = []
             other = []
@@ -129,11 +128,11 @@ def search():
                 tracks = [tracks]
 
             for track in tracks:
-                td = {}
-                td['id'] = track['id']
-                td['type'] = track['type']
-                td['url'] = track['url']
-                td['duration'] = track['duration'] / 1000
+                td = dict()
+                td['id'] = track.get('id')
+                td['type'] = track.get('type')
+                td['url'] = track.get('url')
+                td['duration'] = track.get('duration') / 1000
                 td['resolution'] = track['video']['resolution']
                 if 'presenter' in track['type']:
                     presenter.append(td)
@@ -142,16 +141,20 @@ def search():
                 else:
                     other.append(td)
 
-            v['presenter'] = natsorted(
-                                        presenter,
-                                        key=lambda x: x['resolution']
-                                      )
-            v['presentation'] = natsorted(
-                                        presentation,
-                                        key=lambda x: x['resolution']
-                                      )
-            v['other'] = natsorted(other, key=lambda x: x['resolution'])
-            v['title'] = mediapackage['title']
+            presenter = natsorted(
+                                   presenter,
+                                   key=lambda x: x.get('resolution')
+                                 )
+            presentation = natsorted(
+                                      presentation,
+                                      key=lambda x: x.get('resolution')
+                                    )
+            other = natsorted(other, key=lambda x: x.get('resolution'))
+            title = mediapackage.get('title')
+            v = dict(presenter=presenter,
+                     presentation=presentation,
+                     other=other,
+                     title=title)
             return v
         else:
             return error("Video not found", 404)
@@ -169,19 +172,20 @@ def publish():
             segments = request.json['segments']
             with open('backend/base.xml') as base:
                 data = xmltodict.parse(base.read())
-            videoSegments = []
+            video_segments = []
             for index, segment in enumerate(segments, start=1):
-                seg = {}
+                seg = dict()
                 seg["@id"] = f'segment-{index}'
                 seg['MediaTime'] = {
                     "MediaRelTimePoint": ToMediaRelTimePoint(segment['time']),
                     "MediaDuration": ToMediaDuration(segment['duration'])
                 }
-                videoSegments.append(seg)
-            data['Mpeg7']['Description']['MultimediaContent']['Video']['TemporalDecomposition']['VideoSegment'] = videoSegments
-            parsedXml = xmltodict.unparse(data)
+                video_segments.append(seg)
+            video = data['Mpeg7']['Description']['MultimediaContent']['Video']
+            video['TemporalDecomposition']['VideoSegment'] = video_segments
+            parsed_xml = xmltodict.unparse(data)
             url = f'{opencast_url}/admin-ng/event/{id}/assets'
-            file = {'catalog_segments_xml.0': ('segments.xml', parsedXml, 'text/xml')}
+            file = {'catalog_segments_xml.0': ('segments.xml', parsed_xml, 'text/xml')}
             req = session.post(url, data=segmentsPayload(type),
                                files=file, auth=opencast_auth)
             if req.status_code != 201:
@@ -220,12 +224,12 @@ def FromMediaDuration(duration):
 
 def segmentsPayload(type):
     config = settings()['upload']
-    postData = config['postData']
+    post_data = config['postData']
     if type == 'save':
-        postData['processing']['workflow'] = config['saveWorkflowID']
+        post_data['processing']['workflow'] = config['saveWorkflowID']
     elif type == 'publish':
-        postData['processing']['workflow'] = config['publishWorkflowID']
-    return {'metadata': json.dumps(postData)}
+        post_data['processing']['workflow'] = config['publishWorkflowID']
+    return {'metadata': json.dumps(post_data)}
 
 
 def error(message, status_code):
