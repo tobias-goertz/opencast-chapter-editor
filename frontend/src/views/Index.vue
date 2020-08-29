@@ -16,6 +16,7 @@
       <b-container>
         <TimeStamps
           :initial-segments="segments"
+          :video-duration="videoDuration"
           @delete-segment="deleteSegment"
           @play-segment="playSegment"
         />

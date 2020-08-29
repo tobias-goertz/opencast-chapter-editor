@@ -41,7 +41,8 @@
     "publish": "Publicar",
     "addMarker": "Agregar Capítulo",
     "updateClosest": "actualizar el capítulo más cercano",
-    "deleteClosest": "borrar el capítulo más cercano"
+    "deleteClosest": "borrar el capítulo más cercano",
+    "deleteAll": "borrar todo"
   },
   "table": {
     "title": "Capítulo",

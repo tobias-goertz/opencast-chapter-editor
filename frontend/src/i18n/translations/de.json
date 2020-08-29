@@ -41,7 +41,8 @@
     "publish": "Veröffentlichen",
     "addMarker": "Kapitel hinzufügen",
     "updateClosest": "nächstgelegenes Kapitel aktualisieren",
-    "deleteClosest": "nächstgelegenes Kapitel löschen"
+    "deleteClosest": "nächstgelegenes Kapitel löschen",
+    "deleteAll": "Alle löschen"
   },
   "table": {
     "title": "Kapitel",

@@ -41,7 +41,8 @@
     "publish": "Publish",
     "addMarker": "Add Chapter",
     "updateClosest": "update closest chapter",
-    "deleteClosest": "delete closest chapter"
+    "deleteClosest": "delete closest chapter",
+    "deleteAll": "delete all"
   },
   "table": {
     "title": "Chapter",

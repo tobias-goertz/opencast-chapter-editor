@@ -7,6 +7,13 @@
       <b-col>
         <b-button-group>
           <b-button
+            variant="danger"
+            @click="deleteAllSegments"
+            :disabled="tableBusy"
+          >
+            {{ $t('controls.deleteAll') }}
+          </b-button>
+          <b-button
             variant="info"
             @click="publishSegments('save')"
             :disabled="tableBusy"
@@ -117,6 +124,7 @@ export default {
         name: 'fade',
       },
       segments: this.initialSegments,
+      videoDuration: 0,
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
       url: process.env.VUE_APP_BACKEND_URL || '',
     };
@@ -160,6 +168,13 @@ export default {
     }
   },
   methods: {
+    deleteAllSegments(){
+      this.segments.length = 1
+      this.$set(this.segments, 0, {
+        ...this.segments[0],
+        duration: this.videoDuration,
+      });
+    },
     publishSegments(type) {
       const path = `${this.url}${this.location}/publish?id=${this.$route.params.id}&type=${type}`;
       axios.post(path, {
@@ -188,6 +203,9 @@ export default {
     });
     EventBus.$on('VIDEO_SRC', (payload) => {
       this.videoUrl = payload;
+    });
+    EventBus.$on('DURATION_UPDATE', (payload) => {
+      this.videoDuration = payload;
     });
   },
 };
