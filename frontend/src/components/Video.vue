@@ -61,28 +61,27 @@
           @change="sliderChange"
         />
       </b-container>
+      <b-button-group class="slider-buttons">
+        <b-button
+          variant="outline-success"
+          @click="$emit('add-segment', sliderVal)"
+        >
+            {{ $t('controls.addMarker') }}
+        </b-button>
+        <b-button
+          variant="outline-info"
+          @click="$emit('update-closest-segment', sliderVal)"
+        >
+          {{ $t('controls.updateClosest') }}
+        </b-button>
+        <b-button
+          variant="outline-danger"
+          @click="$emit('delete-closest-segment', sliderVal)"
+        >
+          {{ $t('controls.deleteClosest') }}
+        </b-button>
+      </b-button-group>
     </b-container>
-    <br>
-    <b-button-group>
-      <b-button
-        variant="success"
-        @click="$emit('add-segment', sliderVal)"
-      >
-          {{ $t('controls.addMarker') }}
-      </b-button>
-      <b-button
-        variant="info"
-        @click="$emit('update-closest-segment', sliderVal)"
-      >
-        {{ $t('controls.updateClosest') }}
-      </b-button>
-      <b-button
-        variant="danger"
-        @click="$emit('delete-closest-segment', sliderVal)"
-      >
-        {{ $t('controls.deleteClosest') }}
-      </b-button>
-    </b-button-group>
   </b-container>
 </template>
 
@@ -102,8 +101,10 @@
   text-align: center;
   background-color: #f5f5f5;
   border-radius: 8px;
-  height: 140px;
-
+  height: 200px;
+}
+.slider-buttons{
+  margin-top: 15px;
 }
 .vue-slider-mark{
   width: 2px;
@@ -172,6 +173,7 @@ export default {
           type: 'video/mp4',
           src: '',
         }],
+        poster: '',
       },
       sliderOptions: {
         dotSize: 14,
@@ -184,9 +186,13 @@ export default {
         dragOnClick: true,
         marks: this.segments,
         tooltip: 'none',
+        railStyle: {
+          backgroundColor: '#6bc295',
+        },
         processStyle: {
           borderRadius: '0',
-          backgroundColor: '#6bc295',
+          backgroundColor: 'black',
+          opacity: '0.3',
         },
         dotOptions: {
           style: {
@@ -278,7 +284,6 @@ export default {
       const path = `${this.url}${this.location}/search?id=${this.$route.params.id}`;
       try {
         const { data } = await axios.get(path);
-
         if (data.presentation.length > 0 && data.presenter.length > 0) {
           this.dualPlayer = true;
           this.$emit('dual-player', true); // emit to index

@@ -24,6 +24,9 @@ button{
   z-index: 10;
   position: relative;
 }
+#app{
+  overflow-x: hidden;
+}
 </style>
 
 <script>
