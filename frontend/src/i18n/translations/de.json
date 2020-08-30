@@ -52,5 +52,42 @@
     "duration": "Dauer",
     "chapterTitle": "Titel",
     "actions": "Aktionen"
+  },
+  "tour": {
+    "skip": "Überspringen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "finish": "Beenden"
+  },
+  "help": {
+    "message": "Erklärung für Buttons anzeigen",
+    "update": {
+      "title": "Akutalisieren | Löschen nächstgelegner Kapitel",
+      "message": "Sucht nach dem nächstgelegenen Kapitel auf der Zeitachse ab der aktuellen Zeit. Es können die Steuertasten verwenden, um 1 Sekunde nach links oder rechts zu gehen und so die richtige Position für Aktualisierungen zu finden."
+    },
+    "addMarker": {
+      "title": "Kapitel hinzufügen",
+      "message": "Setzt den Startpunkt eines Kapitels. Das nächste Kapitel bestimmt automatisch die Dauer des vorhergehenden Kapitels."
+    },
+    "timeline": {
+      "title": "Zeitachse",
+      "message": "Zeigt Startpunkte der Kapitel"
+    },
+    "deleteAll": {
+      "title": "Alle löschen | Neuladen",
+      "message": "Löscht alle Kapitel zur Bearbeitung oder lädt sie erneut vom Server, falls der initale Stand wiederhergestellt werden soll."
+    },
+    "saveAndPublish": {
+      "title": "Speichern | Veröffentlichen",
+      "message": "Kapitel zur späteren Bearbeitung vorübergehend speichern oder auf der Videoplattform veröffentlichen."
+    },
+    "table": {
+      "title": "Tabelle",
+      "message": "Zeit ändern, Titel bearbeiten (noch nicht im Videoplayer angezeigt), Kapitel abspielen oder löschen."
+    },
+    "editor": {
+      "title": "Einführung",
+      "message": "Kapitel sind Teile des Videos, die im Player zur schnelleren Navigation durch ein Video angezeigt werden. Die Kapitel werden automatisch auf der Grundlage der erkannten Folienübergänge erstellt. Aus bestimmten Gründen kann es vorkommen, dass Sie Ihre Kapitel bearbeiten, ändern oder aktualisieren möchten. Dieses Tool wird Ihnen dabei helfen."
+    }
   }
 }
