@@ -22,6 +22,12 @@
         />
       </b-container>
     </b-col>
+    <v-tour
+      name="introduction"
+      :steps="steps"
+      :options="tourOptions"
+      :callbacks="tourCallbacks"
+    ></v-tour>
   </b-row>
 </template>
 <script>
@@ -44,6 +50,76 @@ export default {
       location: process.env.VUE_APP_BACKEND_PROXY_PASS_LOCATION || '',
       url: process.env.VUE_APP_BACKEND_URL || '',
       id: this.$route.params.id,
+      tourCallbacks: {
+        onFinish: this.disableTour,
+        onSkip: this.disableTour,
+      },
+      tourOptions: {
+        useKeyboardNavigation: true,
+        startTimeout: 1000,
+        highlight: true,
+        labels: {
+          buttonSkip: this.$t('tour.skip'),
+          buttonPrevious: this.$t('tour.previous'),
+          buttonNext: this.$t('tour.next'),
+          buttonStop: this.$t('tour.finish'),
+        },
+      },
+      steps: [
+        {
+          target: '#title',
+          header: { title: this.$t('help.editor.title') },
+          content: this.$t('help.editor.message'),
+          params: {
+            placement: 'bottom-end',
+          },
+        },
+        {
+          target: '#timeline',
+          header: { title: this.$t('help.timeline.title') },
+          content: this.$t('help.timeline.message'),
+          params: {
+            placement: 'top-end',
+          },
+        },
+        {
+          target: '#add-marker',
+          header: { title: this.$t('help.addMarker.title') },
+          content: this.$t('help.addMarker.message'),
+          params: {
+            placement: 'top-end',
+          },
+        },
+        {
+          target: '#update',
+          header: { title: this.$t('help.update.title') },
+          content: this.$t('help.update.message'),
+          params: {
+            placement: 'top-end',
+          },
+        },
+        {
+          target: '#delete-all-reload',
+          header: { title: this.$t('help.deleteAll.title') },
+          content: this.$t('help.editor.message'),
+          params: {
+            placement: 'top',
+          },
+        },
+        {
+          target: '#save-publish',
+          header: { title: this.$t('help.saveAndPublish.title') },
+          content: this.$t('help.saveAndPublish.message'),
+        },
+        {
+          target: '#segments',
+          header: { title: this.$t('help.table.title') },
+          content: this.$t('help.table.message'),
+          params: {
+            placement: 'bottom-start',
+          },
+        },
+      ],
     };
   },
   methods: {
@@ -161,6 +237,9 @@ export default {
           EventBus.$emit('TABLE_BUSY', false);
         });
     },
+    disableTour() {
+      localStorage.setItem('showTour', false);
+    },
   },
   created() {
     this.loadSegments();
@@ -175,6 +254,9 @@ export default {
         this.segments[0].duration = payload;
       }
     });
+    if (localStorage.showTour === undefined) {
+      this.$tours.introduction.start();
+    }
   },
   watch: {
     segments(segments) {

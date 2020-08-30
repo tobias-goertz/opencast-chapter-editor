@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'vue-tour/dist/vue-tour.css';
 import Vue from 'vue';
 import FlashMessage from '@smartweb/vue-flash-message';
+import VueTour from 'vue-tour';
 import { BootstrapVue } from 'bootstrap-vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -27,6 +29,7 @@ Vue.use(FlashMessage, {
   time: 3000,
   strategy: 'multiple',
 });
+Vue.use(VueTour);
 
 // eslint-disable-next-line
 const i18n = new VueI18n({

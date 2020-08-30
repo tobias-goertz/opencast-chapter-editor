@@ -84,27 +84,6 @@
         </b-button>
       </b-button-group>
     </b-container>
-    <b-popover
-      target="add-marker"
-      :title="$t('help.addMarker.title')"
-      placement="top"
-      variant="secondary"
-    >
-      {{ $t('help.addMarker.message') }}
-    </b-popover>
-    <b-popover target="update"
-      :title="$t('help.update.title')"
-      placement="righttop"
-    >
-      {{ $t('help.update.message') }}
-    </b-popover>
-    <b-popover
-      target="timeline"
-      :title="$t('help.timeline.title')"
-      placement="topright"
-    >
-      {{ $t('help.timeline.message') }}
-    </b-popover>
   </b-container>
 </template>
 

@@ -18,6 +18,7 @@
               @click="reloadSegments"
               :disabled="tableBusy"
               class="space-around"
+              id="delete-all-reload"
             >
               {{ $t('controls.reload') }}
             </b-button>
@@ -28,6 +29,7 @@
               @click="publishSegments('save')"
               :disabled="tableBusy"
               class="space-around"
+              id="save-publish"
             >
               {{ $t('controls.save') }}
             </b-button>
@@ -114,28 +116,6 @@
         </b-button-group>
       </template>
     </b-table>
-    <b-popover
-      target="delete-all-reload"
-      :title="$t('help.deleteAll.title')"
-      placement="leftbottom"
-      fallback-placement="clockwise"
-    >
-      {{ $t('help.deleteAll.message') }}
-    </b-popover>
-    <b-popover
-      target="save-publish"
-      :title="$t('help.saveAndPublish.title')"
-      placement="bottomright"
-    >
-      {{ $t('help.saveAndPublish.message') }}
-    </b-popover>
-    <b-popover
-      target="segments"
-      :title="$t('help.table.title')"
-      placement="leftbottom"
-    >
-      {{ $t('help.table.message') }}
-    </b-popover>
   </b-container>
 </template>
 

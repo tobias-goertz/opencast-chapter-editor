@@ -22,6 +22,7 @@
     "vue-i18n": "^8.20.0",
     "vue-router": "^3.2.0",
     "vue-slider-component": "^3.2.3",
+    "vue-tour": "^1.5.0",
     "vue-video-player": "^5.0.2"
   },
   "devDependencies": {
