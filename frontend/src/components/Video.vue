@@ -54,7 +54,7 @@
         </button>
       </div>
       <p>{{ sliderVal | formatTime }} / {{ this.sliderOptions.max | formatTime }}</p>
-      <b-container class="slider">
+      <b-container class="slider" id="timeline">
         <vue-slider
           v-model="sliderVal"
           v-bind="sliderOptions"
@@ -65,6 +65,7 @@
         <b-button
           variant="outline-success"
           @click="$emit('add-segment', sliderVal)"
+          id="add-marker"
         >
             {{ $t('controls.addMarker') }}
         </b-button>
@@ -77,11 +78,33 @@
         <b-button
           variant="outline-danger"
           @click="$emit('delete-closest-segment', sliderVal)"
+          id="update"
         >
           {{ $t('controls.deleteClosest') }}
         </b-button>
       </b-button-group>
     </b-container>
+    <b-popover
+      target="add-marker"
+      :title="$t('help.addMarker.title')"
+      placement="top"
+      variant="secondary"
+    >
+      {{ $t('help.addMarker.message') }}
+    </b-popover>
+    <b-popover target="update"
+      :title="$t('help.update.title')"
+      placement="righttop"
+    >
+      {{ $t('help.update.message') }}
+    </b-popover>
+    <b-popover
+      target="timeline"
+      :title="$t('help.timeline.title')"
+      placement="topright"
+    >
+      {{ $t('help.timeline.message') }}
+    </b-popover>
   </b-container>
 </template>
 

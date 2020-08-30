@@ -1,6 +1,12 @@
 <template>
   <b-navbar fixed="top" sticky toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand href="/">{{ $t('nav.title') }}</b-navbar-brand>
+    <b-navbar-brand id="title" href="/">{{ $t('nav.title') }}</b-navbar-brand>
+    <b-popover
+      target="title"
+      placement="bottom"
+    >
+      {{ $t('help.editor.message') }}
+    </b-popover>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -10,6 +16,15 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
+        <b-nav-form class="help-toggle">
+          <font-awesome-icon icon="question-circle" class="fa-2x help"/>
+          <b-form-checkbox
+            v-model="help"
+            name="help-button"
+            switch
+            v-b-popover.hover.top="$t('help.message')">
+          </b-form-checkbox>
+        </b-nav-form>
         <b-nav-text>
           <img class="country-flag"
             :src="`${opencast_url}/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
@@ -32,6 +47,14 @@
 .country-flag{
   height: 15px;
 }
+.help{
+  color: #f8f9fa;
+  font-size: 25px;
+  margin-right: 5px;
+}
+.help-toggle{
+  margin-right: 10px;
+}
 </style>
 
 <script>
@@ -48,6 +71,7 @@ export default {
         { value: 'es', text: 'Español' },
       ],
       countryCode: 'de_DE',
+      help: false,
     };
   },
   mounted() {
@@ -62,6 +86,15 @@ export default {
     langChanged(lang) {
       localStorage.Lang = lang;
       this.$root.$i18n.locale = lang;
+    },
+  },
+  watch: {
+    help(help) {
+      if (help === true) {
+        this.$root.$emit('bv::show::popover');
+      } else {
+        this.$root.$emit('bv::hide::popover');
+      }
     },
   },
 };

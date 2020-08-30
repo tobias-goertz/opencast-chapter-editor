@@ -9,6 +9,7 @@
               @click="deleteAllSegments"
               :disabled="tableBusy"
               class="space-around"
+              id="delete-all-reload"
             >
               {{ $t('controls.deleteAll') }}
             </b-button>
@@ -35,6 +36,7 @@
               @click="publishSegments('publish')"
               :disabled="tableBusy"
               class="space-around"
+              id="save-publish"
             >
               {{ $t('controls.publish') }}
             </b-button>
@@ -112,6 +114,28 @@
         </b-button-group>
       </template>
     </b-table>
+    <b-popover
+      target="delete-all-reload"
+      :title="$t('help.deleteAll.title')"
+      placement="leftbottom"
+      fallback-placement="clockwise"
+    >
+      {{ $t('help.deleteAll.message') }}
+    </b-popover>
+    <b-popover
+      target="save-publish"
+      :title="$t('help.saveAndPublish.title')"
+      placement="bottomright"
+    >
+      {{ $t('help.saveAndPublish.message') }}
+    </b-popover>
+    <b-popover
+      target="segments"
+      :title="$t('help.table.title')"
+      placement="leftbottom"
+    >
+      {{ $t('help.table.message') }}
+    </b-popover>
   </b-container>
 </template>
 
@@ -208,6 +232,9 @@ export default {
     }
   },
   methods: {
+    close() {
+      this.popoverShow = false
+    },
     maxTimePerRow(data) {
       if(this.segments.length === data.index + 1){
         return this.videoDuration;

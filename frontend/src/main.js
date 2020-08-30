@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTrash, faPlay, faPause, faStepForward,
   faStepBackward, faFastForward, faFastBackward,
-  faVolumeUp,
+  faVolumeUp, faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueI18n from 'vue-i18n';
@@ -17,7 +17,7 @@ import App from './App.vue';
 library.add(
   faTrash, faPlay, faPause, faStepForward,
   faStepBackward, faFastForward, faFastBackward,
-  faVolumeUp,
+  faVolumeUp, faQuestionCircle,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
