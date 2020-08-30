@@ -1,7 +1,7 @@
 <template>
   <b-container fluid="sm">
     <b-row>
-      <b-col cols="8">
+      <b-col cols="7">
         <div>
           <b-button-group>
             <b-button
@@ -41,7 +41,7 @@
           </b-button-group>
         </div>
       </b-col>
-      <b-col cols="4">
+      <b-col cols="5">
         <b-pagination
           v-model="currentPage"
           :total-rows="rows"

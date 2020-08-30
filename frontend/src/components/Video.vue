@@ -89,6 +89,8 @@
 .control{
   font-size: 50px;
   opacity: 0.8;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 .fa-sm{
   font-size: 35px;
@@ -101,10 +103,10 @@
   text-align: center;
   background-color: #f5f5f5;
   border-radius: 8px;
-  height: 200px;
+  height: 220px;
 }
 .slider-buttons{
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .vue-slider-mark{
   width: 2px;
