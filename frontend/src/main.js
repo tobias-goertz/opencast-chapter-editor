@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-tour/dist/vue-tour.css';
 import Vue from 'vue';
 import FlashMessage from '@smartweb/vue-flash-message';

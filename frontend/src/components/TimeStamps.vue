@@ -15,12 +15,12 @@
             </b-button>
             <b-button
               variant="secondary"
-              @click="reloadSegments"
+              @click="showReloadModal"
               :disabled="tableBusy"
               class="space-around"
               id="delete-all-reload"
             >
-              {{ $t('controls.reload') }}
+              {{ $t('controls.reload.button') }}
             </b-button>
           </b-button-group>
           <b-button-group>
@@ -35,12 +35,12 @@
             </b-button>
             <b-button
               variant="success"
-              @click="publishSegments('publish')"
+              @click="showPublishModal"
               :disabled="tableBusy"
               class="space-around"
               id="save-publish"
             >
-              {{ $t('controls.publish') }}
+              {{ $t('controls.publish.button') }}
             </b-button>
           </b-button-group>
         </div>
@@ -235,15 +235,40 @@ export default {
     formatTime(value) {
       return this.$options.filters.formatTime(value);
     },
-    reloadSegments() {
-      this.$parent.getSegments();
-    },
     deleteAllSegments() {
       this.segments.length = 1
       this.$set(this.segments, 0, {
         ...this.segments[0],
         duration: this.videoDuration,
       });
+    },
+    showReloadModal() {
+      this.$bvModal.msgBoxConfirm(this.$t('controls.reload.message'), {
+        title: this.$t('controls.reload.title'),
+        okTitle: this.$t('controls.ok'),
+        cancelTitle: this.$t('controls.no'),
+        okVariant: 'success',
+        centered: true,
+      })
+        .then(value => {
+          if(value === true) {
+            this.$parent.getSegments();
+          }
+        })
+    },
+    showPublishModal() {
+      this.$bvModal.msgBoxConfirm(this.$t('controls.publish.message'), {
+        title: this.$t('controls.publish.title'),
+        okTitle: this.$t('controls.ok'),
+        cancelTitle: this.$t('controls.no'),
+        okVariant: 'success',
+        centered: true,
+      })
+        .then(value => {
+          if(value === true) {
+            this.publishSegments('publish');
+          }
+        })
     },
     publishSegments(type) {
       const path = `${this.url}${this.location}/publish?id=${this.id}&type=${type}`;
