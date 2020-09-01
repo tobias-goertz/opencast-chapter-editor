@@ -38,12 +38,22 @@
   },
   "controls": {
     "save": "Save",
-    "publish": "Publish",
+    "ok": "yes",
+    "no": "cancel",
+    "publish": {
+      "button": "Publish",
+      "title": "Publish Chapter to Videosystem",
+      "message": "This will publish the created or updated Chapter to the videosystem. After processing, the chapter will be available in the Player. Are your sure you want to publish the chapters?"
+    },
     "addMarker": "Add Chapter",
     "updateClosest": "Update closest chapter",
     "deleteClosest": "Delete closest chapter",
     "deleteAll": "Delete all",
-    "reload": "Reload"
+    "reload": {
+      "button": "Reload",
+      "title": "Reload Chapters from Videosystem",
+      "message": "This will clean your current progress and loads already created chapters from the Videosystem if available. Are you sure?"
+    }
   },
   "table": {
     "title": "Chapter",
