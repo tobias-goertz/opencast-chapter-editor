@@ -52,7 +52,7 @@
     "reload": {
       "button": "Reload",
       "title": "Reload Chapters from Videosystem",
-      "message": "This will clean your current progress and loads already created chapters from the Videosystem if available. Are you sure?"
+      "message": "This will clean your current progress and loads initialy created or saved chapters from the Videosystem if available. Are you sure?"
     }
   },
   "table": {

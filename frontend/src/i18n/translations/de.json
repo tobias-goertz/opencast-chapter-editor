@@ -52,7 +52,7 @@
     "reload": {
       "button": "Neuladen",
       "title": "Kapitel von Videosystem Neuladen",
-      "message": "Hiermit wird der aktuelle Bearbeitungsstand gelöscht. Wenn verfügabr werden bereits vorhandene oder veröffentlichte Kapitel vom Videosystem neugeladen. Sind sie sicher?"
+      "message": "Hiermit wird der aktuelle Bearbeitungsstand gelöscht. Wenn verfügabr werden initial erstellte oder bereits gespeicherte Kapitel vom Videosystem neugeladen. Sind sie sicher?"
     }
   },
   "table": {
