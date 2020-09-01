@@ -336,6 +336,15 @@ export default {
         player.play();
       });
     },
+    // listen to changes of marks - append the maximum val to avoid bug of not showing marker
+    'sliderOptions.marks': {
+      handler(marks) {
+        if (marks[marks.length - 1] !== this.sliderOptions.max) {
+          marks.push(this.sliderOptions.max);
+        }
+      },
+      deep: true,
+    },
   },
   filters: {
     formatTime(value) {
