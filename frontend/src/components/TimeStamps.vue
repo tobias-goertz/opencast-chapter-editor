@@ -248,7 +248,6 @@ export default {
         okTitle: this.$t('controls.ok'),
         cancelTitle: this.$t('controls.no'),
         okVariant: 'success',
-        centered: true,
       })
         .then(value => {
           if(value === true) {
@@ -262,7 +261,6 @@ export default {
         okTitle: this.$t('controls.ok'),
         cancelTitle: this.$t('controls.no'),
         okVariant: 'success',
-        centered: true,
       })
         .then(value => {
           if(value === true) {
