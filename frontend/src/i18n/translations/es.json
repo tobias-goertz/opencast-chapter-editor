@@ -38,12 +38,22 @@
   },
   "controls": {
     "save": "Salvar",
-    "publish": "Publicar",
+    "ok": "",
+    "no": "",
+    "publish": {
+      "button": "Publicar",
+      "title": "",
+      "message": ""
+    },
     "addMarker": "Agregar Capítulo",
     "updateClosest": "actualizar el capítulo más cercano",
     "deleteClosest": "borrar el capítulo más cercano",
     "deleteAll": "borrar todo",
-    "reload": "recargar desde el servidor"
+    "reload": {
+      "button": "recargar desde el servidor",
+      "title": "",
+      "message": ""
+    }
   },
   "table": {
     "title": "Capítulo",
@@ -52,5 +62,42 @@
     "duration": "Duración",
     "chapterTitle": "título",
     "actions": "Acciones"
+  },
+  "tour": {
+    "skip": "Skip tour",
+    "previous": "Previous",
+    "next": "Next",
+    "finish": "Finish"
+  },
+  "help": {
+    "message": "Toggle explanation for buttons",
+    "update": {
+      "title": "Update | Delete closest chapter",
+      "message": "Searches for closest chapter on timeline from current time. You can use the control buttons to seek 1 second to the left or right to find the right position for updates."
+    },
+    "addMarker": {
+      "title": "Add chapter",
+      "message": "Set the startpoint of a Chapter, the next chapter will set the duration of the previous one automaticly."
+    },
+    "timeline": {
+      "title": "Timeline",
+      "message": "shows chapter startpoints"
+    },
+    "deleteAll": {
+      "title": "Delete all | Reload",
+      "message": "Delete all chapter for editing or reload them from server."
+    },
+    "saveAndPublish": {
+      "title": "Save | Publish",
+      "message": "Save chapter temporarily for later editing or publish them to the video Platform."
+    },
+    "table": {
+      "title": "Table",
+      "message": "Change time, edit title (not shown in Videoplayer yet), play or delete chapter."
+    },
+    "editor": {
+      "title": "introduction Tour",
+      "message": "Chapters are segments of the video, displayed in the player for faster navigation through a video. The chapters are created automatically based on detected slide transitions. For some reasons, you might want to edit, change or update your chapters. This tool will help you to do this."
+    }
   }
 }

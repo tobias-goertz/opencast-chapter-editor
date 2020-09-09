@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTrash, faPlay, faPause, faStepForward,
   faStepBackward, faFastForward, faFastBackward,
-  faVolumeUp, faQuestionCircle,
+  faVolumeUp, faQuestionCircle, faPlayCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueI18n from 'vue-i18n';
@@ -20,7 +20,7 @@ import App from './App.vue';
 library.add(
   faTrash, faPlay, faPause, faStepForward,
   faStepBackward, faFastForward, faFastBackward,
-  faVolumeUp, faQuestionCircle,
+  faVolumeUp, faQuestionCircle, faPlayCircle,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

@@ -10,13 +10,19 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
+        <b-nav-item
+          :href="this.opencastUrl + '/engage/theodul/ui/core.html?id=' + this.$route.params.id"
+          target="_blank"
+        >
+          <font-awesome-icon icon="play-circle" class="fa-2x help"/>
+        </b-nav-item>
         <b-nav-item @click="startTour">
           <font-awesome-icon icon="question-circle" class="fa-2x help"/>
         </b-nav-item>
-        <b-nav-text>
+        <b-nav-item>
           <img class="country-flag"
-            :src="`${opencast_url}/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
-        </b-nav-text>
+            :src="`${opencastUrl}/admin-ng/img/lang/${this.$t('countryCode')}.svg`"/>
+        </b-nav-item>
         <b-nav-item-dropdown :text="$t('nav.language')" v-model="$root.$i18n.locale" right>
           <b-dropdown-item v-for="(lang, i) in langs"
                         :key="`Lang${i}`"
@@ -38,7 +44,6 @@
 .help{
   color: #f8f9fa;
   font-size: 25px;
-  margin-right: 10px;
 }
 </style>
 
@@ -49,7 +54,7 @@ export default {
   data() {
     return {
       title: '',
-      opencast_url: process.env.VUE_APP_OPENCAST_URL,
+      opencastUrl: process.env.VUE_APP_OPENCAST_URL,
       langs: [
         { value: 'en', text: 'English' },
         { value: 'de', text: 'Deutsch' },
