@@ -54,7 +54,11 @@ export default {
         onFinish: this.disableTour,
         onSkip: this.disableTour,
       },
-      tourOptions: {
+    };
+  },
+  computed: {
+    tourOptions() {
+      return {
         useKeyboardNavigation: true,
         startTimeout: 1000,
         highlight: true,
@@ -64,8 +68,10 @@ export default {
           buttonNext: this.$t('tour.next'),
           buttonStop: this.$t('tour.finish'),
         },
-      },
-      steps: [
+      };
+    },
+    steps() {
+      return [
         {
           target: '#title',
           header: { title: this.$t('help.editor.title') },
@@ -119,8 +125,8 @@ export default {
             placement: 'bottom-start',
           },
         },
-      ],
-    };
+      ];
+    },
   },
   methods: {
     addSegment(time) {
