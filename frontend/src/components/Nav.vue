@@ -11,7 +11,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item
-          :href="this.opencastUrl + '/engage/theodul/ui/core.html?id=' + this.$route.params.id"
+          :href="`${this.opencastUrl}/engage/theodul/ui/core.html?id=${this.$route.params.id}`"
           target="_blank"
         >
           <font-awesome-icon icon="play-circle" class="fa-2x help"/>
