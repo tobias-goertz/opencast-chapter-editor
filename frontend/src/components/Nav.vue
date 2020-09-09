@@ -60,7 +60,6 @@ export default {
         { value: 'de', text: 'Deutsch' },
         { value: 'es', text: 'Español' },
       ],
-      countryCode: 'de_DE',
       help: false,
     };
   },
@@ -69,7 +68,7 @@ export default {
       this.title = payload;
     });
     if (localStorage.Lang != null) {
-      this.$i18n.locale = localStorage.Lang;
+      this.$root.$i18n.locale = localStorage.Lang;
     }
   },
   methods: {
