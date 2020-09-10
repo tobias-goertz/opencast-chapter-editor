@@ -23,7 +23,7 @@
       </b-button-group>
       <b-button-group>
         <b-button
-          variant="info"
+          variant="success"
           @click="publishSegments('save')"
           :disabled="tableBusy"
           class="space-around"
@@ -62,7 +62,7 @@
         </div>
       </template>
       <template v-slot:cell(index)="data">
-        {{ (currentPage * perPage) - perPage + data.index }}
+        {{ data.index }}
       </template>
       <template v-slot:cell(time)="data">
         <b-form-spinbutton
@@ -86,14 +86,16 @@
       <template v-slot:cell(actions)="data">
         <b-button-group>
           <b-button
-            variant="danger"
-            @click="$emit('delete-segment', (currentPage * perPage) - perPage + data.index)"
+            class="table-button"
+            variant="outline-danger"
+            @click="$emit('delete-segment', data.index)"
             >
               <font-awesome-icon icon="trash"/>
             </b-button>
             <b-button
-              variant="success"
-              @click="$emit('play-segment', (currentPage * perPage) - perPage + data.index)"
+              class="table-button"
+              variant="outline-success"
+              @click="$emit('play-segment', data.index)"
             >
               <font-awesome-icon icon="play"/>
             </b-button>
@@ -127,7 +129,6 @@ table.b-table[aria-busy='true'] {
 .pagination{
   margin-top: 0.5rem;
 }
-
 </style>
 
 <script>
@@ -144,8 +145,6 @@ export default {
   },
   data() {
     return {
-      perPage: 12,
-      currentPage: 1,
       tableBusy: true,
       transProps: {
         name: 'fade',

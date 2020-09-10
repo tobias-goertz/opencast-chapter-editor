@@ -70,7 +70,7 @@
             {{ $t('controls.addMarker') }}
         </b-button>
         <b-button
-          variant="outline-info"
+          variant="outline-secondary"
           @click="$emit('update-closest-segment', sliderVal)"
         >
           {{ $t('controls.updateClosest') }}
