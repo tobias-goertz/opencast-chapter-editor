@@ -1,75 +1,59 @@
 <template>
   <b-container fluid="sm">
-    <b-row>
-      <b-col cols="7">
-        <div>
-          <b-button-group>
-            <b-button
-              variant="danger"
-              @click="deleteAllSegments"
-              :disabled="tableBusy"
-              class="space-around"
-              id="delete-all-reload"
-            >
-              {{ $t('controls.deleteAll') }}
-            </b-button>
-            <b-button
-              variant="secondary"
-              @click="showReloadModal"
-              :disabled="tableBusy"
-              class="space-around"
-              id="delete-all-reload"
-            >
-              {{ $t('controls.reload.button') }}
-            </b-button>
-          </b-button-group>
-          <b-button-group>
-            <b-button
-              variant="info"
-              @click="publishSegments('save')"
-              :disabled="tableBusy"
-              class="space-around"
-              id="save-publish"
-            >
-              {{ $t('controls.save') }}
-            </b-button>
-            <b-button
-              variant="success"
-              @click="showPublishModal"
-              :disabled="tableBusy"
-              class="space-around"
-              id="save-publish"
-            >
-              {{ $t('controls.publish.button') }}
-            </b-button>
-          </b-button-group>
-        </div>
-      </b-col>
-      <b-col cols="5">
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="segments"
-          align="right"
-          class="pagination"
+    <div>
+      <b-button-group>
+        <b-button
+          variant="danger"
+          @click="deleteAllSegments"
+          :disabled="tableBusy"
+          class="space-around"
+          id="delete-all-reload"
         >
-        </b-pagination>
-      </b-col>
-    </b-row>
+          {{ $t('controls.deleteAll') }}
+        </b-button>
+        <b-button
+          variant="secondary"
+          @click="showReloadModal"
+          :disabled="tableBusy"
+          class="space-around"
+          id="delete-all-reload"
+        >
+          {{ $t('controls.reload.button') }}
+        </b-button>
+      </b-button-group>
+      <b-button-group>
+        <b-button
+          variant="info"
+          @click="publishSegments('save')"
+          :disabled="tableBusy"
+          class="space-around"
+          id="save-publish"
+        >
+          {{ $t('controls.save') }}
+        </b-button>
+        <b-button
+          variant="success"
+          @click="showPublishModal"
+          :disabled="tableBusy"
+          class="space-around"
+          id="save-publish"
+        >
+          {{ $t('controls.publish.button') }}
+        </b-button>
+      </b-button-group>
+    </div>
     <b-table
       id="segments"
       :items="segments"
       :v-bind="segments"
       :fields="fields"
-      :per-page="perPage"
-      :current-page="currentPage"
       :busy="tableBusy"
       :tbody-transition-props="transProps"
       striped
       responsive
       small
       borderless
+      sticky-header="75vh"
     >
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
