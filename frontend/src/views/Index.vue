@@ -77,7 +77,8 @@ export default {
           header: { title: this.$t('help.editor.title') },
           content: this.$t('help.editor.message'),
           params: {
-            placement: 'bottom-end',
+            highlight: false,
+            placement: 'top',
           },
         },
         {
