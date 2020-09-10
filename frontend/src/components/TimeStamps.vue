@@ -68,6 +68,7 @@
         <b-form-spinbutton
           v-model="data.item.time"
           class="center"
+          :disabled="segments.length === 1 || data.index === 0"
           :max="maxTimePerRow(data)"
           :min="minTimePerRow(data)"
           :formatter-fn="formatTime"
