@@ -45,7 +45,10 @@ def search():
     id = request.args.get('id')
     if id:
         result = get_video(id)
-        return result.get('message')
+        if result.status_code:
+            return result
+        else:
+            return result.get('message')
     else:
         return error("No ID provided", 422)
 
