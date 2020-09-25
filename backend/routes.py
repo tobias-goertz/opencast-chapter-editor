@@ -45,7 +45,7 @@ def search():
     id = request.args.get('id')
     if id:
         result = get_video(id)
-        if result.status_code:
+        if result.get('status_code'):
             return result
         else:
             return result.get('message')

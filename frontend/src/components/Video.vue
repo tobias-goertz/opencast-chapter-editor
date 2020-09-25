@@ -287,7 +287,8 @@ export default {
     async getVideo() {
       const path = `${this.url}${this.location}/search?id=${this.$route.params.id}`;
       try {
-        const { data } = await axios.get(path);
+        let { data } = await axios.get(path);
+        if (data) { data = data.message; }
         if (data.presentation.length > 0 && data.presenter.length > 0) {
           this.dualPlayer = true;
           this.$emit('dual-player', true); // emit to index
