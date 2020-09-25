@@ -131,8 +131,7 @@
 .highlight-marker{
   background-color: #ffc107;
   border-radius: 3px;
-  width: 3px;
-  opacity: 70%;
+  opacity: 0.7;
 }
 .vol-slider{
   width: 15%;
