@@ -206,19 +206,6 @@ export default {
     playSegment(index) {
       this.playSegmentTime = this.segments[index].time;
     },
-    loadSegments() {
-      // load segments from local storage if available
-      if (localStorage.getItem(this.id)) {
-        try {
-          this.segments = JSON.parse(localStorage.getItem(this.id));
-          setTimeout(() => { EventBus.$emit('TABLE_BUSY', false); }, 100);
-        } catch (e) {
-          localStorage.removeItem(this.id);
-        }
-      } else {
-        this.getSegments();
-      }
-    },
     getSegments() {
       EventBus.$emit('TABLE_BUSY', true);
       const path = `${this.url}${this.location}/segments?id=${this.id}`;
@@ -249,7 +236,7 @@ export default {
     },
   },
   created() {
-    this.loadSegments();
+    this.getSegments();
     if (localStorage.Lang != null) {
       this.$i18n.locale = localStorage.Lang;
     }
@@ -264,13 +251,6 @@ export default {
     if (localStorage.showTour === undefined) {
       this.$tours.introduction.start();
     }
-  },
-  watch: {
-    segments(segments) {
-      // save in localstorage under video-ID
-      const parsed = JSON.stringify(segments);
-      localStorage.setItem(this.id, parsed);
-    },
   },
 };
 </script>
