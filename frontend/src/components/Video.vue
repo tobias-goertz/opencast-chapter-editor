@@ -72,12 +72,16 @@
         <b-button
           variant="outline-secondary"
           @click="$emit('update-closest-segment', sliderVal)"
+          @mouseenter="markerHoverIn"
+          @mouseleave="markerHoverOut"
         >
           {{ $t('controls.updateClosest') }}
         </b-button>
         <b-button
           variant="outline-danger"
           @click="$emit('delete-closest-segment', sliderVal)"
+          @mouseenter="markerHoverIn"
+          @mouseleave="markerHoverOut"
           id="update"
         >
           {{ $t('controls.deleteClosest') }}
@@ -120,6 +124,15 @@
   border-radius: 0;
   box-shadow: none;
   background-color: #525252;
+}
+.vue-slider-mark:last-child .vue-slider-mark-step{
+  display: block;
+}
+.highlight-marker{
+  background-color: #ffc107;
+  border-radius: 3px;
+  width: 3px;
+  opacity: 70%;
 }
 .vol-slider{
   width: 15%;
@@ -227,6 +240,21 @@ export default {
       this.player.forEach((player) => {
         player.currentTime(slider);
       });
+    },
+    findClosestMarker() {
+      let time = 0;
+      this.player.forEach((player) => {
+        time = player.currentTime();
+      });
+      return this.$parent.indexOfClosestSegment(time);
+    },
+    markerHoverIn() {
+      const index = this.findClosestMarker();
+      document.getElementsByClassName('vue-slider-mark')[index].classList.add('highlight-marker');
+    },
+    markerHoverOut() {
+      const index = this.findClosestMarker();
+      document.getElementsByClassName('vue-slider-mark')[index].classList.remove('highlight-marker');
     },
     togglePlayPause(state) {
       this.player.forEach((player) => {
@@ -336,15 +364,6 @@ export default {
         player.currentTime(time);
         player.play();
       });
-    },
-    // listen to changes of marks - append the maximum val to avoid bug of not showing marker
-    'sliderOptions.marks': {
-      handler(marks) {
-        if (marks[marks.length - 1] !== this.sliderOptions.max) {
-          marks.push(this.sliderOptions.max);
-        }
-      },
-      deep: true,
     },
   },
   filters: {
