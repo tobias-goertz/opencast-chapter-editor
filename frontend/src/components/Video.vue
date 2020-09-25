@@ -301,9 +301,12 @@ export default {
     },
     // player is ready
     playerReadied() {
-      this.player.forEach((player) => {
+      this.player.forEach((player, index) => {
         player.pause();
         player.volume(0.8);
+        if (this.dualPlayer && index === 1) {
+          player.muted(true);
+        }
       });
     },
     volumeChange(vol) {
