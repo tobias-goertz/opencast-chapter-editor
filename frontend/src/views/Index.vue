@@ -106,14 +106,6 @@ export default {
           },
         },
         {
-          target: '#delete-all-reload',
-          header: { title: this.$t('help.deleteAll.title') },
-          content: this.$t('help.editor.message'),
-          params: {
-            placement: 'top',
-          },
-        },
-        {
           target: '#save-publish',
           header: { title: this.$t('help.saveAndPublish.title') },
           content: this.$t('help.saveAndPublish.message'),

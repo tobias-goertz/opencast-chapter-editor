@@ -4,22 +4,22 @@
     "heading": "Videos"
   },
   "nav": {
-    "title": "Kapitel Editor",
+    "title": "Kapiteleditor",
     "connected": "verbunden mit: ",
     "language": "Sprache"
   },
   "flash": {
     "error": {
-      "videos": "Es sind keine Videos verfügbar",
+      "videos": "Es sind keine Videos verfügbar.",
       "segments": {
         "loading": {
-          "message": "Keine Kapitel verfügbar, erstellen Sie Ihre eigenen"
+          "message": "Keine Kapitel verfügbar, erstellen Sie Ihre eigenen."
         },
         "save": {
-          "title": "Kapitel konnten nicht gespeichert werden"
+          "title": "Kapitel konnten nicht gespeichert werden."
         },
         "publish": {
-          "title": "Kapitel konnten nicht veröffentlicht werden"
+          "title": "Kapitel konnten nicht veröffentlicht werden."
         }
       }
     },
@@ -27,7 +27,7 @@
       "segments": {
         "save": {
           "title": "Kapitel erfolgreich gespeichert!",
-          "message": "Die Kapitel wurden erfolgreich zwischengespeichert. Um die Kapitel zu veröffentlichen, wählen Sie 'Veröffentlichen'"
+          "message": "Die Kapitel wurden erfolgreich zwischengespeichert. Um die Kapitel zu veröffentlichen, wählen Sie 'Veröffentlichen'."
         },
         "publish": {
           "title": "Kapitel erfolgreich veröffentlicht!",
@@ -37,23 +37,18 @@
     }
   },
   "controls": {
-    "ok": "ok",
-    "no": "abbechen",
+    "ok": "Ok",
+    "no": "Abbrechen",
     "save": "Speichern",
     "publish": {
       "button": "Veröffentlichen",
-      "title": "Kapitel im Videosystem Veröffentlichen",
-      "message": "Hiermit werden die erstellten Kapitel zum Videosystem veröffentlicht. Wenn diese vom System verarbeitet wurden, sind sie im Videoplayer direkt verfügbar. Sind sie sicher?"
+      "title": "Kapitel im Videosystem veröffentlichen",
+      "message": "Hiermit werden die Kapitel zum Videosystem veröffentlicht. Wenn diese vom System verarbeitet wurden, sind sie im Videoplayer direkt verfügbar. Sind sie sicher?"
     },
     "addMarker": "Kapitel hinzufügen",
-    "updateClosest": "nächstgelegenes Kapitel aktualisieren",
-    "deleteClosest": "nächstgelegenes Kapitel löschen",
-    "deleteAll": "Alle löschen",
-    "reload": {
-      "button": "Neuladen",
-      "title": "Kapitel von Videosystem Neuladen",
-      "message": "Hiermit wird der aktuelle Bearbeitungsstand gelöscht. Wenn verfügabr werden initial erstellte oder bereits gespeicherte Kapitel vom Videosystem neugeladen. Sind sie sicher?"
-    }
+    "updateClosest": "Nächstgelegenes Kapitel aktualisieren",
+    "deleteClosest": "Nächstgelegenes Kapitel löschen",
+    "deleteAll": "Alle löschen"
   },
   "table": {
     "title": "Kapitel",
@@ -70,10 +65,10 @@
     "finish": "Beenden"
   },
   "help": {
-    "message": "Erklärung für Buttons anzeigen",
+    "message": "Erklärungen anzeigen",
     "update": {
-      "title": "Akutalisieren | Löschen nächstgelegner Kapitel",
-      "message": "Sucht nach dem nächstgelegenen Kapitel auf der Zeitachse ab der aktuellen Zeit. Es können die Steuertasten verwenden, um 1 Sekunde nach links oder rechts zu gehen und so die richtige Position für Aktualisierungen zu finden."
+      "title": "Aktualisieren | Löschen nächstgelegner Kapitel",
+      "message": "Sucht nach dem nächstgelegenen Kapitel auf der Zeitachse ab der aktuellen Zeit. Es können die Steuertasten verwendet werden, um 1 Sekunde nach links oder rechts zu gehen und so die richtige Position für Aktualisierungen zu finden."
     },
     "addMarker": {
       "title": "Kapitel hinzufügen",
@@ -81,11 +76,7 @@
     },
     "timeline": {
       "title": "Zeitachse",
-      "message": "Zeigt Startpunkte der Kapitel"
-    },
-    "deleteAll": {
-      "title": "Alle löschen | Neuladen",
-      "message": "Löscht alle Kapitel zur Bearbeitung oder lädt sie erneut vom Server, falls der initale Stand wiederhergestellt werden soll."
+      "message": "Zeigt Startpunkte der Kapitel."
     },
     "saveAndPublish": {
       "title": "Speichern | Veröffentlichen",
@@ -93,11 +84,11 @@
     },
     "table": {
       "title": "Tabelle",
-      "message": "Zeit ändern, Titel bearbeiten (noch nicht im Videoplayer angezeigt), Kapitel abspielen oder löschen. Scrollen sie, um alle Kapitel zu sehen."
+      "message": "Zeit ändern, Titel bearbeiten (noch nicht im Videoplayer angezeigt), Kapitel abspielen oder löschen. Scrollen Sie, um alle Kapitel zu sehen."
     },
     "editor": {
       "title": "Einführung",
-      "message": "Kapitel sind Teile des Videos, die im Player zur schnelleren Navigation durch ein Video angezeigt werden. Die Kapitel werden automatisch auf der Grundlage der erkannten Folienübergänge erstellt. Aus bestimmten Gründen kann es vorkommen, dass Sie Ihre Kapitel bearbeiten, ändern oder aktualisieren möchten. Dieses Tool wird Ihnen dabei helfen."
+      "message": "Kapitel sind Teile des Videos, die im Player zur schnelleren Navigation durch ein Video angezeigt werden. Die Kapitel werden automatisch auf der Grundlage der erkannten Folienübergänge erstellt. Sie können Ihre Kapitel mit diesem Tool bearbeiten, ändern oder aktualisieren."
     }
   }
 }

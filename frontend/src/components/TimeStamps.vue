@@ -11,15 +11,6 @@
         >
           {{ $t('controls.deleteAll') }}
         </b-button>
-        <b-button
-          variant="secondary"
-          @click="showReloadModal"
-          :disabled="tableBusy"
-          class="space-around"
-          id="delete-all-reload"
-        >
-          {{ $t('controls.reload.button') }}
-        </b-button>
       </b-button-group>
       <b-button-group>
         <b-button
