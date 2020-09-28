@@ -55,13 +55,3 @@ def get_video_list():
                f'{opencast_url}/api/events').json()
     payload = dict(videos=res, opencastUrl=opencast_url)
     return json.dumps(payload)
-
-
-def get_public_event(id):
-    res = session.get(
-               f'{opencast_url}/api/events/{id}?withpublications=true',
-          ).json()
-    if res:
-        return success(res, 200)
-    else:
-        return error("Video not found", 404)

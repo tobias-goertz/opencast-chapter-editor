@@ -28,17 +28,6 @@ def videos():
     return get_video_list()
 
 
-# returns event including publication (not used anymore)
-@app.route('/video')
-def video():
-    id = request.args.get('id')
-    if id:
-        result = get_public_event(id)
-        return result
-    else:
-        return error("No ID provided", 400)
-
-
 # returns Video sources in array of types in orderd resolution
 @app.route('/media')
 def search():
