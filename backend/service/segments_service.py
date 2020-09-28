@@ -7,10 +7,10 @@ from .settings_service import get_settings
 
 def get_segments(id):
     callback = get_segments_xml(id)
-    if callback.get('status_code') == 400:
-        return get_public_segments(id)
+    if callback.status_code == 400:
+        return get_public_segments(id).message
     else:
-        return callback.get('message')
+        return callback.message
 
 
 def get_segments_xml(id):
