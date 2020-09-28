@@ -315,7 +315,7 @@ export default {
       });
     },
     async getVideo() {
-      const path = `${this.url}${this.location}/search?id=${this.$route.params.id}`;
+      const path = `${this.url}${this.location}/media?id=${this.$route.params.id}`;
       try {
         let { data } = await axios.get(path);
         if (data) { data = data.message; }

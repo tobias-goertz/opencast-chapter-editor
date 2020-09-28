@@ -3,7 +3,7 @@ from backend import app
 from .service.settings_service import get_settings
 from .service.segments_service import get_segments, publish_segments
 from .service.response_service import error
-from .service.video_service import get_video, get_video_list, get_public_event
+from .service.video_service import get_video, get_video_list
 
 
 # returns settings from oc-config via settings_service
@@ -40,7 +40,7 @@ def video():
 
 
 # returns Video sources in array of types in orderd resolution
-@app.route('/search')
+@app.route('/media')
 def search():
     id = request.args.get('id')
     if id:
@@ -54,7 +54,7 @@ def search():
 
 
 # publishes segments based on type (save or publish) via segments_service
-@app.route('/publish', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def publish():
     id = request.args.get('id')
     type = request.args.get('type')

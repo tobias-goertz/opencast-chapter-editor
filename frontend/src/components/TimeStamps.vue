@@ -244,7 +244,7 @@ export default {
         })
     },
     publishSegments(type) {
-      const path = `${this.url}${this.location}/publish?id=${this.id}&type=${type}`;
+      const path = `${this.url}${this.location}/upload?id=${this.id}&type=${type}`;
       axios.post(path, {
         segments: this.segments,
         videoUrl: this.videoUrl,
