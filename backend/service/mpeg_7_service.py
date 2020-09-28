@@ -28,7 +28,10 @@ def mpeg7_to_dict(res):
         for segment in segments:
             time = FromMediaRelTimePoint(segment['MediaTime']['MediaRelTimePoint'])
             duration = FromMediaDuration(segment['MediaTime']['MediaDuration'])
-            title = segment['@id']
+            if 'MediaTitle' in segment:
+                title = segment['MediaTitle']
+            else:
+                title = segment['@id']
             converted_segment = dict(time=time, duration=duration, title=title)
             converted_segments.append(converted_segment)
         result = dict(segments=converted_segments, duration=converted_duration)
@@ -41,12 +44,13 @@ def dict_to_mpeg7(segments, video_url, video_duration):
     with open('backend/base.xml') as base:
         data = xmltodict.parse(base.read())
     video_segments = []
-    for index, segment in enumerate(segments, start=1):
+    for index, segment in enumerate(segments, start=0):
         seg = dict()
-        seg["@id"] = segment.get('title')
+        seg['@id'] = f'segment-{index}'
+        seg['MediaTitle'] = segment.get('title')
         seg['MediaTime'] = {
-            "MediaRelTimePoint": ToMediaRelTimePoint(segment['time']),
-            "MediaDuration": ToMediaDuration(segment['duration'])
+            'MediaRelTimePoint': ToMediaRelTimePoint(segment['time']),
+            'MediaDuration': ToMediaDuration(segment['duration'])
         }
         video_segments.append(seg)
     video = data['Mpeg7']['Description']['MultimediaContent']['Video']
