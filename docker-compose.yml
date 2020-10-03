@@ -3,6 +3,10 @@ services:
   backend:
     build: ./backend
     container_name: chapter-editor-backend
+    environment:
+      - OPENCAST_URL=https://develop.opencast.org
+      - OPENCAST_USER=admin
+      - OPENCAST_PW=opencast
     volumes:
       - ./backend/:/backend
     ports:
