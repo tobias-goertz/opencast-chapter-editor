@@ -29,7 +29,7 @@ It's recommended to add a new user for the chapter-editor in opencast with admin
 ### Frontend
 
 You need to configure some enviroment variables to work.
-Edit the created `.env` for your purposes. For production builds with NGINX, see [configuration](#configure) chapter below.
+Edit the created `.env` for your purposes. For production builds with NGINX, see [configuration](#configuration) chapter below.
 
 ```
 cd frontend
@@ -46,6 +46,13 @@ yarn build
 
 This will generate static content you can serve via any web server in `dist/`.
 That's it.
+If you prefer to run a local development server directly, you can use this
+instead:
+
+```
+cd frontend
+yarn serve
+```
 
 ## Opencast APIs used by Chapter-Editor
 Opencast Studio uses the following APIs:
