@@ -23,4 +23,4 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 if __name__ == "__main__":
     app.run()
 
-from backend import routes
+from app import routes

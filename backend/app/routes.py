@@ -1,5 +1,5 @@
 from flask import request
-from backend import app
+from app import app
 from .service.settings_service import get_settings
 from .service.segments_service import get_segments, publish_segments
 from .service.response_service import error
