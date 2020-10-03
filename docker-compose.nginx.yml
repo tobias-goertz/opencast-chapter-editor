@@ -9,7 +9,7 @@ services:
       - 5000
 
   nginx:
-    build: ./nginx
+    build: ./frontend
     container_name: chapter-editor-frontend-nginx
     restart: always
     ports:
