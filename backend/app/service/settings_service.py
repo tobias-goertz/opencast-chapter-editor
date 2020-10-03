@@ -1,4 +1,4 @@
-from backend import session, opencast_url
+from app import session, opencast_url
 from .response_service import error
 
 

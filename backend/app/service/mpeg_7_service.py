@@ -1,4 +1,4 @@
-from backend import session
+from app import session
 from datetime import datetime
 from .response_service import error, success
 import xmltodict

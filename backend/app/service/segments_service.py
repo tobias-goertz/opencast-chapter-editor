@@ -1,4 +1,4 @@
-from backend import session, opencast_url
+from app import session, opencast_url
 import json
 from .response_service import error, success
 from .mpeg_7_service import mpeg7_to_dict, dict_to_mpeg7
