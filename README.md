@@ -2,17 +2,17 @@
 Bachelor Thesis Project: Development of a web-based Chapter Editor for Lecture Recordings in [Opencast](https://opencast.org)
 
 ## Project Setup
-This Project uses Flask as Backend and Vue.js as Frontend.
+This Project uses Flask as backend and Vue.js as frontend.
 The Backend can be served with docker, the frontend is a static SPA build with yarn and need to be served with a web server.
 
 ### All-in-one
-To kickstart use the `docker-compose.nginx.yml` docker script wich starts backend and frontend with NGINX:
+To kickstart use the `docker-compose.nginx.yml` docker script, which starts backend and frontend with NGINX:
 ```
 docker-compose -f docker-compose.nginx.yml up
 ```
 Now you can launch the application on [`http://localhost`](http://localhost).
 
-If you want to install the app on a server, depending one the way of serving, a seperate start of backend and frontend might be recommended. More about configuration for production see [configuration](#configuration) section.
+If you want to install the app on a server, depending one the way of serving, a separate start of backend and frontend might be recommended. More about configuration for production see [configuration](#configuration) section.
 ### Backend
 Start the backend Server with docker-compose script:
 ```
@@ -28,7 +28,7 @@ It's recommended to add a new user for the chapter-editor in opencast with admin
 
 ### Frontend
 
-You need to configure some enviroment variables to work.
+You need to configure some environment variables to work.
 Edit the created `.env` for your purposes. For production builds with NGINX, see [configuration](#configuration) chapter below.
 
 ```
@@ -55,7 +55,7 @@ yarn serve
 ```
 
 ## Opencast APIs used by Chapter-Editor
-Opencast Studio uses the following APIs:
+Opencast Chapter-Editor uses the following APIs:
 
 - `/search`
 - `/assets/episode`
@@ -69,12 +69,12 @@ To work with opencast, you can specify some configuration options for opencast: 
 
 #### NGINX configuration
 To run the Chapter-Editor on a server, you can use NGINX to serve the generated static `dist/` content and reverse proxy the backend-docker-container. An Example NGINX configuration for that can be found here: [`nginx.conf`](/docs/nginx.conf).
-If you reverse proxy the backend-container, you need to specify the `VUE_APP_BACKEND_PROXY_PASS_LOCATION` enviroment variable in the `.env.production` for the frontend. E.g. if `/api/` is the location, you need to set `/api` as value and remove the `VUE_APP_BACKEND_URL` since it got proxied by the same URL.
+If you reverse proxy the backend-container, you need to specify the `VUE_APP_BACKEND_PROXY_PASS_LOCATION` environment variable in the `.env.production` for the frontend. E.g. if `/api/` is the location, you need to set `/api` as value and remove the `VUE_APP_BACKEND_URL` since it got proxied by the same URL.
 
 ## Development
 
 ### Backend
-For local development install [pipenv](https://pypi.org/project/pipenv/) and Python 3.8.6. Create a virtual  enviroment with pipenv, activate it and start Flask:
+For local development install [pipenv](https://pypi.org/project/pipenv/) and Python 3.8.6. Create a virtual environment with pipenv, activate it and start Flask:
 ```
 cd backend
 pipenv install
